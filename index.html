@@ -4,14 +4,29 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>EdenPlan | Savjetovanje za EU i nacionalne potpore</title>
-  <meta name="description" content="EdenPlan: savjetovanje za EU fondove i nacionalne potpore u Hrvatskoj i Crnoj Gori. Provjera prihvatljivosti, priprema prijave, paket financiranja, provedba i nabave, projekti za javna tijela, edukacije.">
+  <meta name="description" content="EdenPlan: savjetovanje za EU fondove i nacionalne potpore u Hrvatskoj. Provjera prihvatljivosti, priprema prijave, paket financiranja, provedba i nabave, projekti za gradove, općine i ustanove, edukacije.">
+  <link rel="canonical" href="https://edenplan.hr/">
   <meta property="og:title" content="EdenPlan, savjetovanje za EU i nacionalne potpore">
-  <meta property="og:description" content="Od prve provjere do zadnjeg zahtjeva za isplatu. Firme i javna tijela u Hrvatskoj i Crnoj Gori.">
+  <meta property="og:description" content="Od prve provjere do zadnjeg zahtjeva za isplatu. Firme, gradovi, općine i ustanove u Hrvatskoj.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://edenplan.hr/">
+  <meta property="og:image" content="https://edenplan.hr/og-slika.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="hr_HR">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="scene.css">
   <script>document.documentElement.classList.add('js');</script>
+  <script src="ikone.js"></script>
+  <script src="scene.js"></script>
+  <script src="zajednicko.js"></script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"ProfessionalService","name":"EdenPlan j.d.o.o.","url":"https://edenplan.hr/","telephone":"+385992954600","email":"info@edenplan.hr","description":"Savjetovanje za EU fondove i nacionalne potpore: provjera prihvatljivosti, priprema prijave, paket financiranja, provedba, projekti za javna tijela, edukacije.","address":{"@type":"PostalAddress","streetAddress":"Ulica dr. Franje Bučara 9","postalCode":"10430","addressLocality":"Samobor","addressCountry":"HR"},"founder":{"@type":"Person","name":"Dane Crljen"},"areaServed":{"@type":"Country","name":"Hrvatska"}}
+  </script>
 </head>
 <body>
 
@@ -21,33 +36,88 @@
     <button class="burger" aria-label="Izbornik" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
     <ul class="menu" id="menu">
       <li><a href="#usluge">Usluge</a></li>
+      <li><a href="natjecaji.html">Natječaji</a></li>
       <li><a href="#kako">Kako radimo</a></li>
-      <li><a href="#zakoga">Za koga</a></li>
+      <li><a href="#pitanja">Pitanja</a></li>
       <li><a href="#omeni">O meni</a></li>
       <li><a class="pill" href="#kontakt">Javite se</a></li>
     </ul>
   </div>
 </header>
 
-<section class="hero">
-  <div class="glow"></div>
+<section class="hero split">
+  <div class="glowwrap" id="glowwrap"><div class="glow"></div></div>
+  <div class="dots-bg" aria-hidden="true">
+    <i style="left:6%;top:18%;background:#5ac8a8;--t:8s;--dx:12px;--dy:-26px"></i>
+    <i style="left:14%;top:70%;background:#0071e3;--t:11s;--dx:-10px;--dy:-18px;width:10px;height:10px"></i>
+    <i style="left:28%;top:12%;background:#ff9f43;--t:9s;--dx:8px;--dy:-30px;width:9px;height:9px"></i>
+    <i style="left:42%;top:84%;background:#5ac8a8;--t:12s;--dx:-14px;--dy:-16px"></i>
+    <i style="left:55%;top:8%;background:#e05d6f;--t:10s;--dx:10px;--dy:-24px;width:8px;height:8px"></i>
+    <i style="left:66%;top:78%;background:#0071e3;--t:13s;--dx:-8px;--dy:-28px;width:12px;height:12px"></i>
+    <i style="left:80%;top:22%;background:#5ac8a8;--t:9.5s;--dx:12px;--dy:-20px;width:9px;height:9px"></i>
+    <i style="left:91%;top:60%;background:#ff9f43;--t:11.5s;--dx:-12px;--dy:-26px"></i>
+    <i style="left:93%;top:10%;background:#e05d6f;--t:8.5s;--dx:6px;--dy:-18px;width:7px;height:7px"></i>
+  </div>
   <div class="wrap">
-    <span class="eyebrow reveal">EdenPlan, savjetovanje za EU i nacionalne potpore</span>
-    <h1 class="reveal" style="--d:.08s">Od prve provjere do zadnjeg zahtjeva za isplatu.</h1>
-    <p class="sub reveal" style="--d:.16s">Pomažemo firmama i javnim tijelima u Hrvatskoj i Crnoj Gori da dođu do bespovratnih sredstava i povoljnog financiranja, i da ih provedu bez gubitka novca na kontrolama.</p>
-    <div class="links reveal" style="--d:.24s">
-      <a class="link" href="#kontakt">Javite se</a>
-      <a class="link" href="#usluge">Pogledajte usluge</a>
+    <div class="grid">
+      <div>
+        <span class="eyebrow reveal">EdenPlan, savjetovanje za EU i nacionalne potpore</span>
+        <h1 class="reveal" style="--d:.08s">Od prve provjere do zadnjeg zahtjeva za isplatu.</h1>
+        <p class="sub reveal" style="--d:.16s">Pomažemo <span class="rot"><span class="w" id="rot">firmama</span></span> u Hrvatskoj da dođu do bespovratnih sredstava i povoljnog financiranja iz nacionalnih i EU programa, i da ih provedu bez gubitka novca na kontrolama.</p>
+        <div class="links reveal" style="--d:.24s">
+          <a class="link" href="#kontakt">Javite se</a>
+          <a class="link" href="natjecaji.html">Aktualni natječaji</a>
+        </div>
+      </div>
+      <svg class="ill reveal right" style="--d:.2s" viewBox="0 0 520 420" aria-hidden="true">
+        <circle class="soft" cx="300" cy="215" r="165"/>
+        <g class="cloud" style="animation-duration:16s"><path class="ln fl" d="M70 112h58a16 16 0 0 0 0-32 22 22 0 0 0-42-8 18 18 0 0 0-16 40z"/></g>
+        <path id="pp" d="M40 250C150 150 280 70 480 48" fill="none" stroke="#9aa5ae" stroke-width="1.5" stroke-dasharray="4 7"/>
+        <g class="bob slow">
+          <rect class="ln fl" x="150" y="130" width="250" height="160" rx="12"/>
+          <rect class="ln" x="166" y="146" width="218" height="128" rx="6" style="fill:#f7fafd"/>
+          <path class="ln type" d="M186 172h110" pathLength="100"/>
+          <path class="ln type" d="M186 192h130" pathLength="100" style="animation-delay:.4s"/>
+          <path class="ln type" d="M186 212h80" pathLength="100" style="animation-delay:.8s"/>
+          <path class="ln" d="M186 250h40"/>
+          <rect class="acc grow" x="306" y="196" width="14" height="60" rx="3" style="animation-delay:.1s"/>
+          <rect class="acc grow" x="328" y="176" width="14" height="80" rx="3" style="animation-delay:.5s;opacity:.75"/>
+          <rect class="acc grow" x="350" y="214" width="14" height="42" rx="3" style="animation-delay:.9s;opacity:.5"/>
+        </g>
+        <path class="ln fl" d="M120 300h310l22 24H98z"/>
+        <path class="ln" d="M245 311h60"/>
+        <g class="bob">
+          <circle class="acc" cx="424" cy="118" r="26"/>
+          <path d="M411 119l9 9 17-18" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <g class="bob" style="animation-delay:1.2s">
+          <path class="ln fl" d="M84 332a26 9 0 0 0 52 0a26 9 0 0 0-52 0z"/>
+          <path class="ln fl" d="M84 332v-14a26 9 0 0 1 52 0v14"/>
+          <path class="ln fl" d="M84 318v-14a26 9 0 0 1 52 0v14"/>
+          <text x="110" y="308" text-anchor="middle" font-size="12" font-weight="700" fill="#1f2f46" font-family="Helvetica, Arial, sans-serif">€</text>
+        </g>
+        <g transform="translate(452 332)"><g class="spin"><circle class="ln fl" r="18"/><circle class="ln" r="7"/><path class="ln" d="M0-26v8M0 18v8M-26 0h8M18 0h8M-18-18l6 6M12 12l6 6M18-18l-6 6M-12 12l-6 6"/></g></g>
+        <g><path class="ln fl" d="M0 0L-20-8l5 8-5 8z"/><path class="ln" d="M-15 0h-8"/><animateMotion dur="8s" repeatCount="indefinite" rotate="auto" keyPoints="0;1;1" keyTimes="0;.85;1" calcMode="linear"><mpath href="#pp"/></animateMotion><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;.1;.72;.85;1" dur="8s" repeatCount="indefinite"/></g>
+        <!-- oblak iza kojeg avion nestaje: crta se poslije aviona -->
+        <g class="cloud" style="animation-duration:22s;animation-direction:alternate-reverse"><path class="ln fl" d="M400 72h48a13 13 0 0 0 0-26 18 18 0 0 0-34-6 15 15 0 0 0-14 32z"/></g>
+      </svg>
     </div>
     <div class="cue reveal" style="--d:.4s">Pomaknite dolje<span></span></div>
   </div>
 </section>
 
+<div class="marquee" aria-hidden="true">
+  <div class="mt">
+    <span>HAMAG-BICRO</span><span>Ministarstvo gospodarstva</span><span>Program Konkurentnost i kohezija</span><span>Fond za zaštitu okoliša</span><span>HBOR</span><span>Interreg</span><span>Eurostars</span><span>EIC Accelerator</span><span>LIFE</span><span>Obzor Europa</span><span>NetZeroCities</span><span>Gradovi i županije</span>
+    <span>HAMAG-BICRO</span><span>Ministarstvo gospodarstva</span><span>Program Konkurentnost i kohezija</span><span>Fond za zaštitu okoliša</span><span>HBOR</span><span>Interreg</span><span>Eurostars</span><span>EIC Accelerator</span><span>LIFE</span><span>Obzor Europa</span><span>NetZeroCities</span><span>Gradovi i županije</span>
+  </div>
+</div>
+
 <section id="pozivi" class="grey">
   <div class="wrap">
     <div class="head reveal">
-      <h2>Aktualni pozivi.</h2>
-      <p>Što je otvoreno sada u Hrvatskoj, Crnoj Gori i na razini EU. Pozivi kojima je rok prošao sami nestaju s popisa.</p>
+      <h2>Aktualni natječaji.</h2>
+      <p>Što je otvoreno sada u Hrvatskoj i programima EU. Natječaji kojima je rok prošao sami nestaju s popisa. <a class="link" href="natjecaji.html">Svi natječaji s filtrima</a></p>
     </div>
   </div>
   <div class="carousel reveal" aria-roledescription="vrtuljak" aria-label="Aktualni pozivi">
@@ -62,61 +132,153 @@
   </div>
 </section>
 
-<section id="zakoga">
+<section>
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat reveal zoom"><div class="v"><span class="num" data-to="10">0</span><small>/10</small></div><div class="l">prijava na kojima sam radio odobreno, 100 %</div></div>
+      <div class="stat reveal zoom" style="--d:.08s"><div class="v"><span class="num" id="num-pozivi" data-to="12">0</span></div><div class="l">rokova koje pratimo sada</div></div>
+      <div class="stat reveal zoom" style="--d:.16s"><div class="v"><span class="num" data-to="0">0</span><small>€</small></div><div class="l">prvi razgovor i provjera prihvatljivosti</div></div>
+      <div class="stat reveal zoom" style="--d:.24s"><div class="v"><span class="num" data-to="2">0</span></div><div class="l">radna dana do prvog odgovora</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="zakoga" class="grey">
   <div class="wrap">
     <div class="head reveal">
       <h2>Za koga radimo.</h2>
       <p>Tri vrste klijenata, ista pravila: prvo provjera, pa posao.</p>
     </div>
     <div class="tiles three">
-      <div class="tile big reveal"><h3>Firme</h3><p>Proizvodnja, tehnologija i digitalna rješenja, zelene tehnologije i energija, poljoprivreda i prerada hrane, turizam. Od mikro poduzeća do srednjih firmi s razvojnim projektima.</p></div>
-      <div class="tile big reveal" style="--d:.1s"><h3>Javna tijela</h3><p>Gradovi, općine, županije, komunalna poduzeća, ustanove. Infrastruktura, energija, okoliš i usluge za građane, uz pravila javne nabave i državnih potpora.</p></div>
-      <div class="tile big reveal" style="--d:.2s"><h3>Crna Gora i regija</h3><p>Firme i općine koje se pripremaju za EU fondove prije i nakon ulaska u EU: što je otvoreno sada, tko može, koliko, i što pripremiti da novac stigne kad pozivi izađu.</p></div>
+      <div class="tile big reveal left"><h3>Firme</h3><p>Proizvodnja, tehnologija i digitalna rješenja, zelene tehnologije i energija, poljoprivreda i prerada hrane, turizam. Od mikro poduzeća do srednjih firmi s razvojnim projektima.</p></div>
+      <div class="tile big reveal zoom" style="--d:.1s"><h3>Javna tijela</h3><p>Gradovi, općine, županije, komunalna poduzeća, ustanove. Infrastruktura, energija, okoliš i usluge za građane, uz pravila javne nabave i državnih potpora.</p></div>
+      <div class="tile big reveal right" style="--d:.2s"><h3>Ustanove i udruge</h3><p>Fakulteti, instituti, škole, zdravstvene i kulturne ustanove, udruge. Projekti istraživanja, obrazovanja, zajednice i prekogranične suradnje, uz pravila koja vrijede za javne korisnike.</p></div>
     </div>
   </div>
 </section>
 
-<section id="usluge" class="grey">
+<section id="usluge">
   <div class="wrap">
-    <div class="head reveal">
-      <h2>Cijeli put projekta.</h2>
-      <p>Šest usluga. Možete uzeti samo jednu ili sve zajedno.</p>
+    <div class="intro2">
+      <div class="head reveal left">
+        <h2>Cijeli put projekta.</h2>
+        <p>Šest usluga, od prve provjere do zadnje isplate. Možete uzeti samo jednu ili sve zajedno. Ono što se u praksi najčešće zaboravi, provedba, kod nas je dio paketa od prvog dana.</p>
+      </div>
+      <svg class="ill reveal right" style="max-width:380px" viewBox="0 0 420 420" aria-hidden="true">
+        <circle class="soft" cx="210" cy="222" r="150" style="fill:#f3ebf8"/>
+        <circle class="acc tw" cx="90" cy="84" r="3"/><circle class="acc tw" cx="330" cy="72" r="2.5" style="animation-delay:.7s"/><circle class="acc tw" cx="352" cy="166" r="3" style="animation-delay:1.3s"/><circle class="acc tw" cx="66" cy="206" r="2.2" style="animation-delay:.3s"/><circle class="acc tw" cx="300" cy="300" r="2.2" style="animation-delay:1.9s"/>
+        <g class="puff"><circle class="ln fl" cx="190" cy="332" r="14"/></g>
+        <g class="puff" style="animation-delay:.7s"><circle class="ln fl" cx="224" cy="342" r="11"/></g>
+        <g class="puff" style="animation-delay:1.4s"><circle class="ln fl" cx="206" cy="352" r="9"/></g>
+        <g class="lift">
+          <path class="flame" d="M196 300c0 22 14 38 14 38s14-16 14-38z" fill="#ff9f43"/>
+          <path class="ln fl" d="M210 92c-34 36-40 110-36 190h72c4-80-2-154-36-190z"/>
+          <circle class="ln" cx="210" cy="172" r="16" style="fill:#e9f2fc"/>
+          <path class="ln fl" d="M174 238l-30 34v30l30-20zM246 238l30 34v30l-30-20z"/>
+          <path class="ln" d="M196 282h28"/>
+        </g>
+        <path class="ln" d="M110 376h200"/>
+      </svg>
     </div>
     <div class="tiles three">
-      <div class="tile reveal"><span class="n">01</span><h3>Dijagnostika</h3><p>Prije pisanja provjerimo što realno možete dobiti: veličina, vlasništvo, ranije potpore, djelatnost, spremnost projekta. Dobijete popis izvora koji vam odgovaraju i jasnu preporuku, ili pošten odgovor da sada nema smisla.</p></div>
-      <div class="tile reveal" style="--d:.08s"><span class="n">02</span><h3>Priprema prijave</h3><p>Nacionalni pozivi (HAMAG-BICRO, Ministarstvo gospodarstva, ministarstva, gradovi i županije) i programi EU (Interreg, Eurostars, LIFE, pozivi za gradove). Pišemo onako kako ocjenjivač boduje i provjeravamo svaku brojku prije predaje.</p></div>
-      <div class="tile reveal" style="--d:.16s"><span class="n">03</span><h3>Paket financiranja</h3><p>Kredit, EU povrat i bespovratna potpora u jednoj strukturi, bez preklapanja potpora i bez probijanja limita. Uz plan novčanog toka, jer potpora dolazi tek nakon što je trošak plaćen.</p></div>
-      <div class="tile reveal"><span class="n">04</span><h3>Provedba</h3><p>Nabave po pravilima programa, zahtjevi za isplatu, izvještaji, izmjene ugovora, kontrole na licu mjesta. Uredna provedba je razlika između odobrenog i isplaćenog iznosa.</p></div>
-      <div class="tile reveal" style="--d:.08s"><span class="n">05</span><h3>Projekti za javna tijela</h3><p>Od projektne ideje do prijave i provedbe za gradove, općine, komunalna poduzeća i ustanove, uključujući europske programe za gradove i prekograničnu suradnju.</p></div>
-      <div class="tile reveal" style="--d:.16s"><span class="n">06</span><h3>Edukacije</h3><p>Radionice za uprave i timove: kako čitati poziv, kako se boduje, kako izgleda provedba i kontrola. Za firme i tijela koja s EU fondovima tek počinju, u Hrvatskoj i Crnoj Gori.</p></div>
+      <div class="tile reveal">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" pathLength="100"/><path d="M15.5 15.5 21 21" pathLength="100"/></svg>
+        <h3>Dijagnostika</h3><p>Prije pisanja provjerimo što realno možete dobiti: veličina, vlasništvo, ranije potpore, djelatnost, spremnost projekta. Dobijete popis izvora koji vam odgovaraju i jasnu preporuku, ili pošten odgovor da sada nema smisla.</p></div>
+      <div class="tile reveal" style="--d:.08s">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h8l5 5v13H6z" pathLength="100"/><path d="M14 3v5h5" pathLength="100"/><path d="M9 13h7M9 17h7" pathLength="100"/></svg>
+        <h3>Priprema prijave</h3><p>Nacionalni pozivi (HAMAG-BICRO, Ministarstvo gospodarstva, ministarstva, gradovi i županije) i programi EU (Interreg, Eurostars, LIFE, pozivi za gradove). Pišemo onako kako ocjenjivač boduje i provjeravamo svaku brojku prije predaje.</p></div>
+      <div class="tile reveal" style="--d:.16s">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6a7 3 0 1 0 14 0a7 3 0 1 0 -14 0" pathLength="100"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6" pathLength="100"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" pathLength="100"/></svg>
+        <h3>Paket financiranja</h3><p>Kredit, EU povrat i bespovratna potpora u jednoj strukturi, bez preklapanja potpora i bez probijanja limita. Uz plan novčanog toka, jer potpora dolazi tek nakon što je trošak plaćen.</p></div>
+      <div class="tile reveal">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4h6v3H9z" pathLength="100"/><path d="M15 5h3v16H6V5h3" pathLength="100"/><path d="M9 13l2.2 2.2L15.5 11" pathLength="100"/></svg>
+        <h3>Provedba</h3><p>Nabave po pravilima programa, zahtjevi za isplatu, izvještaji, izmjene ugovora, kontrole na licu mjesta. Uredna provedba je razlika između odobrenog i isplaćenog iznosa.</p></div>
+      <div class="tile reveal" style="--d:.08s">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18" pathLength="100"/><path d="M5 21V9h14v12" pathLength="100"/><path d="M12 3l8 6H4z" pathLength="100"/><path d="M8 21v-6h3v6M13 21v-6h3v6" pathLength="100"/></svg>
+        <h3>Projekti za javna tijela</h3><p>Od projektne ideje do prijave i provedbe za gradove, općine, komunalna poduzeća i ustanove, uključujući europske programe za gradove i prekograničnu suradnju.</p></div>
+      <div class="tile reveal" style="--d:.16s">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6c-2-1.5-5-2-8-2v14c3 0 6 .5 8 2 2-1.5 5-2 8-2V4c-3 0-6 .5-8 2z" pathLength="100"/><path d="M12 6v14" pathLength="100"/></svg>
+        <h3>Edukacije</h3><p>Radionice za uprave i timove: kako čitati poziv, kako se boduje, kako izgleda provedba i kontrola. Za firme i tijela koja s EU fondovima tek počinju.</p></div>
     </div>
   </div>
 </section>
 
 <section id="kako" class="dark">
   <div class="wrap">
-    <div class="head reveal">
-      <h2>Kako radimo.</h2>
-      <p>Pet pravila koja vrijede za svaki posao, od prvog razgovora.</p>
+    <div class="intro2">
+      <div class="head reveal left">
+        <h2>Kako radimo.</h2>
+        <p>Pet pravila koja vrijede za svaki posao, od prvog razgovora. Bez sitnih slova.</p>
+      </div>
+      <svg class="ill reveal right" style="max-width:360px" viewBox="0 0 420 300" aria-hidden="true">
+        <circle class="soft" cx="230" cy="150" r="120"/>
+        <circle class="tw" cx="60" cy="50" r="2.5" fill="#fff"/><circle class="tw" cx="380" cy="40" r="2" fill="#fff" style="animation-delay:.6s"/><circle class="tw" cx="40" cy="190" r="2" fill="#fff" style="animation-delay:1.2s"/><circle class="tw" cx="395" cy="230" r="2.5" fill="#fff" style="animation-delay:1.8s"/><circle class="tw" cx="120" cy="270" r="2" fill="#fff" style="animation-delay:.9s"/>
+        <g class="bob slow">
+          <path class="ln fl" d="M80 120a130 48 0 1 0 260 0a130 48 0 1 0-260 0z"/>
+          <path class="ln" d="M80 120h260M112 98c60 10 136 10 196 0M112 142c60-10 136-10 196 0"/>
+          <path class="ln fl" d="M330 100l40-18v76l-40-18z"/>
+          <path class="ln" d="M180 168l-8 30M240 168l8 30"/>
+          <rect class="ln fl" x="168" y="198" width="84" height="30" rx="6"/>
+          <path class="ln" d="M184 213h10M204 213h10M224 213h10"/>
+          <g class="sway"><path class="ln" d="M330 82v-28"/><path class="acc" d="M330 54h24l-6 7 6 7h-24z"/></g>
+        </g>
+      </svg>
     </div>
     <div class="rules">
-      <div class="rule reveal"><div class="big">1</div><div><h3>Prvo provjera, tek onda pisanje.</h3><p>Ako ne možete, kažemo odmah. Ne naplaćujemo prijavu koja nema smisla.</p></div></div>
-      <div class="rule reveal"><div class="big">2</div><div><h3>Fiksna cijena, dogovorena unaprijed.</h3><p>Jasan opseg i cijena po isporuci. Ugovor s firmom ili ustanovom koja prijavljuje projekt.</p></div></div>
-      <div class="rule reveal"><div class="big">3</div><div><h3>Povjerljivost prije podataka.</h3><p>Ugovor o povjerljivosti prije razmjene podataka. Vaši podaci ne idu nikome trećem.</p></div></div>
-      <div class="rule reveal"><div class="big">4</div><div><h3>Ne obećavamo ishod.</h3><p>Odluke donose tijela i neovisni ocjenjivači. Obećavamo točnu, urednu i na vrijeme predanu prijavu.</p></div></div>
-      <div class="rule reveal"><div class="big">5</div><div><h3>Samo službeni kanali.</h3><p>Po pravilima o sukobu interesa, javnoj nabavi i državnim potporama. Bez iznimke.</p></div></div>
+      <div class="rule reveal left"><div class="big">1</div><div><h3>Prvo provjera, tek onda pisanje.</h3><p>Ako ne možete, kažemo odmah. Ne naplaćujemo prijavu koja nema smisla.</p></div></div>
+      <div class="rule reveal left"><div class="big">2</div><div><h3>Fiksna cijena, dogovorena unaprijed.</h3><p>Jasan opseg i cijena po isporuci. Ugovor s firmom ili ustanovom koja prijavljuje projekt.</p></div></div>
+      <div class="rule reveal left"><div class="big">3</div><div><h3>Povjerljivost prije podataka.</h3><p>Ugovor o povjerljivosti prije razmjene podataka. Vaši podaci ne idu nikome trećem.</p></div></div>
+      <div class="rule reveal left"><div class="big">4</div><div><h3>Ne obećavamo ishod.</h3><p>Odluke donose tijela i neovisni ocjenjivači. Obećavamo točnu, urednu i na vrijeme predanu prijavu.</p></div></div>
+      <div class="rule reveal left"><div class="big">5</div><div><h3>Samo službeni kanali.</h3><p>Po pravilima o sukobu interesa, javnoj nabavi i državnim potporama. Bez iznimke.</p></div></div>
     </div>
   </div>
 </section>
 
-<section class="band">
+<section id="suradnja">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Kako izgleda suradnja.</h2>
+      <p>Pet koraka, uvijek istim redom.</p>
+    </div>
+    <div class="timeline">
+      <div class="tstep reveal"><span class="dot">1</span><div><span class="t">dan 1</span><h3>Upit</h3><p>Nekoliko rečenica o firmi ili ustanovi i o tome što planirate.</p></div></div>
+      <div class="tstep reveal" style="--d:.08s"><span class="dot">2</span><div><span class="t">do 2 radna dana</span><h3>Razgovor i provjera</h3><p>Prvi razgovor i provjera prihvatljivosti. Besplatno.</p></div></div>
+      <div class="tstep reveal" style="--d:.16s"><span class="dot">3</span><div><span class="t">isti tjedan</span><h3>Ponuda</h3><p>Opseg, rok i fiksna cijena. Ugovor o povjerljivosti.</p></div></div>
+      <div class="tstep reveal" style="--d:.24s"><span class="dot">4</span><div><span class="t">2 do 8 tjedana</span><h3>Prijava</h3><p>Pisanje, proračun, prilozi, provjera svake brojke, predaja.</p></div></div>
+      <div class="tstep reveal" style="--d:.32s"><span class="dot">5</span><div><span class="t">trajanje projekta</span><h3>Provedba</h3><p>Nabave, zahtjevi za isplatu, izvještaji, kontrole, do zadnje isplate.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="band grey">
   <div class="wrap">
     <h2 class="reveal">Svaka brojka u prijavi ima izvor. Svaki uvjet je provjeren prije predaje.</h2>
     <p class="reveal" style="--d:.1s">Tako se piše prijava koja prolazi ocjenu i preživi kontrolu.</p>
   </div>
 </section>
 
-<section id="omeni">
+<section id="pitanja">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Česta pitanja.</h2>
+      <p>Ono što nas pitaju na prvom sastanku.</p>
+    </div>
+    <div class="faq reveal">
+      <details><summary>Koliko traje priprema prijave?</summary><div class="a">Ovisi o pozivu. Jednostavan nacionalni poziv, npr. vaučer, tjedan do dva. Složeniji poziv s proračunom, partnerima i prilozima 4 do 8 tjedana. Programi EU s konzorcijem iz više zemalja 2 do 4 mjeseca. Najviše vremena ode na dokumente firme i ponude dobavljača, pa od njih krećemo prvi dan.</div></details>
+      <details><summary>Koliko košta?</summary><div class="a">Prvi razgovor i provjera prihvatljivosti su besplatni. Nakon toga dobijete ponudu s fiksnom cijenom po poslu, prije nego išta počne. Dio naknade može se dogovoriti ovisno o ishodu, ali uvijek unaprijed i u ugovoru. Naknada se ne plaća iz bespovratnih sredstava: priprema prijave u pravilu nije prihvatljiv trošak projekta.</div></details>
+      <details><summary>Što ako projekt ne prođe?</summary><div class="a">Dobijete ocjenu tijela i naš osvrt što promijeniti. Većina poziva se ponavlja, pa prijavu prilagođavamo za sljedeći rok. Ishod ne obećavamo nikada: odlučuju tijela i neovisni ocjenjivači, a mi odgovaramo za točnu i urednu prijavu predanu na vrijeme.</div></details>
+      <details><summary>Možemo li se prijaviti ako firma ima kredit?</summary><div class="a">Da, kredit nije zapreka, često je dio paketa financiranja. Zapreka su poduzeće u teškoćama (gubitak veći od polovine kapitala, stečaj, predstečaj), blokiran račun i neplaćeni porezi. To provjerimo prvi dan.</div></details>
+      <details><summary>Što je de minimis?</summary><div class="a">Potpora male vrijednosti: ukupno najviše 300.000 € svih takvih potpora jednom poduzetniku, zajedno s povezanim firmama, u tri godine. Prije prijave izračunamo koliko vam je prostora ostalo, jer prekoračenje znači smanjenje ili gubitak potpore.</div></details>
+      <details><summary>Dobiva li se novac unaprijed?</summary><div class="a">Rijetko. Većina poziva isplaćuje nakon plaćenih računa ili u tranšama uz vaš vlastiti udio; predujam postoji kod nekih poziva, obično uz jamstvo. Zato uz prijavu radimo i plan novčanog toka, da znate koliko morate premostiti i kako.</div></details>
+      <details><summary>Što znači TRL?</summary><div class="a">Razina tehnološke spremnosti, od 1 (ideja) do 9 (proizvod na tržištu). Pozivi za istraživanje traže niže razine, pozivi za komercijalizaciju i ulaganja više. Pogrešna procjena razine je čest razlog odbijanja, pa je utvrđujemo s dokazima prije pisanja.</div></details>
+      <details><summary>Radite li i izvan Zagreba i Zagrebačke županije?</summary><div class="a">Da, u cijeloj Hrvatskoj. Većina posla ide na daljinu (dokumenti, pozivi, e-mail), a sastanak uživo kad treba. Za programe EU prijave se pišu na engleskom.</div></details>
+      <details><summary>Trebam li vam odmah dati povjerljive podatke?</summary><div class="a">Ne. Za prvi razgovor dovoljni su djelatnost, veličina firme i što planirate. Povjerljivi podaci idu tek nakon ugovora o povjerljivosti.</div></details>
+      <details><summary>Vodite li i javnu nabavu?</summary><div class="a">Za firme da, po pravilima programa za one koji nisu obveznici javne nabave. Za javne naručitelje nudimo pripremu i provjeru dokumentacije i podršku kroz postupak, u skladu s pravilima programa i Zakonom o javnoj nabavi.</div></details>
+    </div>
+  </div>
+</section>
+
+<section id="omeni" class="grey">
   <div class="wrap about">
     <div>
       <h2 class="reveal">O meni.</h2>
@@ -125,7 +287,7 @@
       <p class="reveal">Iskustvo s pozivima HAMAG-BICRO-a i Ministarstva gospodarstva iz Programa Konkurentnost i kohezija i Nacionalnog plana oporavka i otpornosti, s partnerstvima i konzorcijima, i s pravilima koja odlučuju hoće li trošak na kraju biti priznat.</p>
       <p class="reveal">EdenPlan je moja firma za savjetovanje. Kad projekt traži tehnički, projektantski ili pravni dio, radim sa suradnicima iz tih struka, a vi imate jednog sugovornika.</p>
     </div>
-    <div class="quote reveal" style="--d:.12s">
+    <div class="quote reveal right" style="--d:.12s">
       <strong>Zašto mali tim</strong>
       Radite izravno s osobom koja piše i provodi vaš projekt. Bez prodavača, bez predaje juniorima, bez čekanja na odgovor.
       <ul>
@@ -139,7 +301,7 @@
 
 <section id="kontakt">
   <div class="wrap">
-    <div class="cta reveal">
+    <div class="cta reveal zoom">
       <h2>Pošaljite nekoliko rečenica o tome što planirate.</h2>
       <p>U roku od dva radna dana javljamo može li se i kako dalje. Bez obveze i bez naplate za prvi razgovor.</p>
       <div class="row">
@@ -160,46 +322,472 @@
 
 <script type="application/json" id="pozivi-data">
 {
-  "stanje": "7.10.2026.",
-  "pozivi": [
-    {"zemlja": "Crna Gora", "tijelo": "Fond za inovacije Crne Gore", "naziv": "Energetska efikasnost u metalnoj industriji", "za": "mikro, male i srednje firme iz metalske industrije", "iznos": "grant od 50.000 do 100.000 €, do 80 %", "rok": "2026-10-19", "rok_tekst": "19.10.2026. u 15:00", "link": "https://fondzainovacije.me/programi/"},
-    {"zemlja": "Crna Gora", "tijelo": "Fond za inovacije Crne Gore", "naziv": "Provjera inovativnog koncepta (POC)", "za": "mikro, male i srednje firme i istraživačke ustanove, ideja na TRL 3 do 4", "iznos": "od 20.000 do 40.000 €, 70 % mikro i male, 60 % srednje, 90 % ustanove", "rok": "2026-10-30", "rok_tekst": "30.10.2026. u 15:00", "link": "https://fondzainovacije.me/programi/"},
-    {"zemlja": "EU", "tijelo": "Europsko vijeće za inovacije (EIC)", "naziv": "EIC Accelerator", "za": "start-upi i MSP s inovacijom na TRL 6 do 8", "iznos": "bespovratno do 2,5 mil. € i ulaganje od 1 do 10 mil. €", "rok": "2026-11-04", "rok_tekst": "4.11.2026. u 17:00 (puni prijedlog)", "link": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator_en"},
-    {"zemlja": "EU, Mediteran", "tijelo": "Interreg Euro-MED", "naziv": "8. poziv, tematski testni projekti", "za": "javna tijela i ustanove kao nositelji, partneri iz najmanje 5 zemalja", "iznos": "projekt do 2 mil. €, 80 % iz programa", "rok": "2026-11-13", "rok_tekst": "13.11.2026. u 13:00", "link": "https://interreg-euro-med.eu/en/call-8-thematic-projects/"},
-    {"zemlja": "Hrvatska", "tijelo": "HAMAG-BICRO, Interreg Mađarska-Hrvatska", "naziv": "B Light 2, prvi poziv", "za": "MSP iz pograničnih županija, u paru s mađarskim partnerom", "iznos": "projekt od 75.000 do 375.000 €, do 80 %", "rok": "2026-11-23", "rok_tekst": "23.11.2026.", "link": "https://hamagbicro.hr/"},
-    {"zemlja": "EU", "tijelo": "RENEW-BOOSTER (Single Market Programme)", "naziv": "Poziv 2 za MSP: fotonapon, mreže, digitalna rješenja za energiju", "za": "MSP s prototipom na TRL 6 ili više", "iznos": "do 60.000 € po firmi", "rok": "2026-11-30", "rok_tekst": "30.11.2026. u 17:00", "link": "https://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/opportunities/competitive-calls-cs/47108154"},
-    {"zemlja": "EU, misijski gradovi", "tijelo": "NetZeroCities", "naziv": "Enabling City Transformation 2 (ECT2)", "za": "gradovi iz EU misije klimatski neutralnih gradova (iz Crne Gore Podgorica, iz Hrvatske Zagreb) s partnerima", "iznos": "500.000 € za grad s partnerom, do 1,5 mil. € za tri grada, 100 % troškova", "rok": "2026-12-03", "rok_tekst": "3.12.2026. u 12:00", "link": "https://netzerocities.eu/enabling-city-transformation/"},
-    {"zemlja": "Hrvatska", "tijelo": "MINGO, Program Konkurentnost i kohezija", "naziv": "Inovacije procesa u S3 područjima (PK.1.3.11)", "za": "mikro, mali i srednji poduzetnici iz prerađivačke industrije", "iznos": "od 150.000 do 450.000 €, 50 do 75 %", "rok": "2026-12-31", "rok_tekst": "31.12.2026. u 11:00 ili do iskorištenja sredstava", "link": "https://mingo.gov.hr/otvoreni-pozivi-9725/9725"},
-    {"zemlja": "Hrvatska", "tijelo": "MINGO, Program Konkurentnost i kohezija", "naziv": "INTEGRATOR (PK.1.3.08)", "za": "konzorciji MSP-ova u lancima vrijednosti velikih integratora", "iznos": "od 300.000 do 820.000 €, do 50 % (prateće aktivnosti do 75 %)", "rok": "2026-12-31", "rok_tekst": "31.12.2026. u 11:00; zaprimanje ponovno od 3.11.2026.", "link": "https://mingo.gov.hr/otvoreni-pozivi-9725/9725"},
-    {"zemlja": "Hrvatska", "tijelo": "MINGO, Program Konkurentnost i kohezija", "naziv": "Inovacijski vaučeri za MSP-ove (PK.1.1.06)", "za": "mikro, mali i srednji poduzetnici, usluge znanstvenih organizacija", "iznos": "od 2.000 do 10.000 €, 50 % (do 85 %)", "rok": "2026-12-31", "rok_tekst": "31.12.2026. u 16:00 ili do iskorištenja sredstava", "link": "https://mingo.gov.hr/otvoreni-pozivi-9725/9725"},
-    {"zemlja": "Crna Gora", "tijelo": "Ministarstvo prosvjete, nauke i inovacija", "naziv": "Podsticajne mjere za istraživanje i inovacije 2026", "za": "startupi i firme u Registru inovacione djelatnosti, i firme donatori uz umanjenje poreza", "iznos": "po projektu od 20.000 do 400.000 € ovisno o TRL-u (porezna olakšica, ne grant)", "rok": "2026-12-31", "rok_tekst": "31.12.2026. u 13:30 ili do utroška, redom prijava", "link": "https://www.gov.me/clanak/konkurs-za-sticanje-statusa-korisnika-podsticajnih-mjera-istrazivanja-i-inovacije-2026"},
-    {"zemlja": "EU, Eureka", "tijelo": "Eurostars-3, hrvatski dio HAMAG-BICRO", "naziv": "Eurostars-3, poziv 12", "za": "konzorcij koji vodi inovativni MSP, partneri iz najmanje 2 Eurostars zemlje", "iznos": "za hrvatske MSP-ove do 300.000 €, 60 % mikro i mala, 50 % srednja", "rok": "2027-03-04", "rok_tekst": "4.3.2027. u 14:00 (otvara se 17.12.2026.)", "link": "https://www.eurekanetwork.org/programmes-and-calls/eurostars/"}
-  ]
+ "stanje": "8.10.2026.",
+ "pozivi": [
+  {
+   "id": "potpore-za-kapitalna-ulaganja-u-malom-gospodarstvu-u-2026-ii",
+   "zemlja": "Hrvatska",
+   "tijelo": "Grad Samobor, Upravni odjel za gospodarstvo, razvoj i projekte EU",
+   "program": "proračun Grada Samobora (Program mjera razvoja malog gospodarstva, poljoprivrede i turizma 2026.)",
+   "naziv": "Potpore za kapitalna ulaganja u malom gospodarstvu u 2026., II. krug (Grad Samobor) (KLASA: 302-05/26-02/3)",
+   "za_koga": [
+    "firme",
+    "poljoprivreda"
+   ],
+   "za": "Obrti i trgovačka društva (mali gospodarski subjekti) te OPG-ovi u sustavu PDV-a sa sjedištem na području Samobora koji su nakon 1.10.2025. zaposlili osobu s prebivalištem u Samoboru koju prvi put zapošljavaju; najviše 3 novozaposlene osobe po korisniku; potpora male vrijednosti.",
+   "sto_financira": "Kapitalna ulaganja u proizvodnju (strojevi, oprema, nadogradnja, poslovni prostor); ulaganje najmanje 10.000 €, pojedinačni trošak veći od 1.300 €.",
+   "iznos": "600 € (osoba starija od 30 godina) i 800 € (mlađa od 30) u uslužnim djelatnostima; 900 € i 1.100 € u proizvodnim djelatnostima, po novozaposlenoj osobi; 70 % troška zakupa u 1. godini, 50 % od 1. do 2. godine, 30 % od 2. do 3. godine zakupa",
+   "status": "otvoren",
+   "rok": "2026-10-20",
+   "rok_tekst": "Objavljen 29.9.2026., otvoren 15 radnih dana od objave na stranici Grada; Grad nije objavio datum. Ako se dan objave ne računa, rok istječe 20.10.2026., ako se računa 17.10.2026.; sigurnije predati do 17.10.2026. Prijava e-mailom, osobno ili poštom.",
+   "objavljen": "2026-09-29",
+   "link": "https://www.samobor.hr/dokumenti?catId=830",
+   "tema": [
+    "digitalizacija",
+    "infrastruktura",
+    "proizvodnja",
+    "zapošljavanje"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "eic-accelerator-2026-open-i-challenges",
+   "zemlja": "EU",
+   "tijelo": "Europsko vijeće za inovacije (EIC), provedba EISMEA",
+   "program": "Obzor Europa, EIC",
+   "naziv": "EIC Accelerator 2026 (Open i Challenges) (HORIZON-EIC-2026-ACCELERATOR-01)",
+   "za_koga": [
+    "firme",
+    "ustanove"
+   ],
+   "za": "Pojedinačni start-up ili MSP sa sjedištem u državi članici EU-a ili zemlji pridruženoj Obzoru Europa; mali mid-cap (do 499 zaposlenih) samo iznimno za brzo skaliranje; mogu se prijaviti i fizičke osobe ili subjekti koji namjeravaju osnovati MSP u EU-u ili pridruženoj zemlji.",
+   "sto_financira": "Skaliranje inovacija visokog učinka, osobito deep tech (TRL 6 do 8 i dalje): bespovratna sredstva, ulaganje u kapital ili kombinacija, uz usluge poslovnog ubrzanja.",
+   "iznos": "Bespovratni dio ispod 2,5 mil. € (aktivnosti do 24 mjeseca); ulaganje 1 do 10 mil. € (kombinirano ili samo ulaganje); proračun 2026.: EIC Accelerator Open 414 mil. €, EIC Accelerator Challenges 220 mil. €; Bespovratni dio: do 70 % prihvatljivih troškova, unutar gornje granice bespovratnog iznosa od 2.499.999 € (program rada EIC 2026.)",
+   "status": "otvoren",
+   "rok": "2026-11-04",
+   "rok_tekst": "Kratka prijava u bilo koje doba, serije za ocjenu svaki prvi utorak u mjesecu u 17:00 po briselskom vremenu; rokovi za punu prijavu u 2026. (serije u 17:00 po briselskom vremenu): 7. siječnja, 4. ožujka, 6. svibnja, 8. srpnja, 2. rujna i 4. studenoga 2026. (zadnji preostali: 4. studenoga 2026.). Na F&T portalu poziv za kratke prijave 2026. vodi se do 17. prosinca 2026.",
+   "objavljen": "2025-11-06",
+   "link": "https://eic.ec.europa.eu/eic-funding-opportunities/eic-accelerator_en",
+   "tema": [
+    "inovacije",
+    "istraživanje"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "dekarbonizacija-i-modernizacija-toplinskih-sustava-za-grijanje",
+   "zemlja": "Hrvatska",
+   "tijelo": "MZOZT s Ministarstvom gospodarstva i FZOEU; prijave se šalju FZOEU",
+   "program": "Fond za modernizaciju (Modernizacijski fond)",
+   "naziv": "Dekarbonizacija i modernizacija toplinskih sustava za grijanje i/ili hlađenje (MF-2026-2-1)",
+   "za_koga": [
+    "firme"
+   ],
+   "za": "Trgovačka društva (mikro, mala, srednja i velika) s djelatnošću opskrbe parom i klimatizacijom (NKD 2025, područje D), s dozvolom HERA-e za proizvodnju, distribuciju ili opskrbu toplinskom energijom i, gdje je primjenjivo, koncesijom za distribucijsku mrežu.",
+   "sto_financira": "Izgradnja, proširenje ili nadogradnja energetski učinkovitih centraliziranih toplinskih sustava: proizvodnja topline iz OIE, otpadne topline ili visokoučinkovite kogeneracije, skladištenje topline i modernizacija distribucijske mreže; ne za fosilna goriva ni otpad. Minimalno smanjenje emisija stakleničkih plinova 10 %.",
+   "iznos": "najviše 30.000.000,00 € po prijavitelju (za jedan ili više projekata); ukupno 80.000.000,00 €; OIE, otpadna toplina ili kogeneracija iz OIE: 65,00 % mala, 55,00 % srednja, 45,00 % velika poduzeća; ostale mjere: 50,00 %, 40,00 %, 30,00 %",
+   "status": "otvoren",
+   "rok": "2026-11-09",
+   "rok_tekst": "do 9.11.2026. u 12:00 ili do iskorištenja sredstava (rok produljen 1. izmjenom Poziva od 3.8.2026., prije je bio 7.8.2026.); zaprimanje od 7.5.2026. u 12:00",
+   "objavljen": "2026-04-08",
+   "link": "https://www.fzoeu.hr/hr/natjecaj/7539?nid=268",
+   "tema": [
+    "energija"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "seas-poziv-za-male-projekte-poduzetnika-u-plavom-gospodarstvu",
+   "zemlja": "EU",
+   "tijelo": "Projekt SEAS (partner HAMAG-BICRO, kontakt seas@hamagbicro.hr); program Interreg VI-A Italija-Hrvatska 2021.-2027.",
+   "program": "Interreg VI-A Italija-Hrvatska 2021.-2027. (EFRR i nacionalna sredstva)",
+   "naziv": "SEAS, poziv za male projekte poduzetnika u plavom gospodarstvu (Interreg VI-A Italija-Hrvatska) (SEAS (Sustainable Enterprises Advancing Blue Solutions), Call for Small Project Proposals)",
+   "za_koga": [
+    "firme"
+   ],
+   "za": "Mikro, mala i srednja poduzeća i start-upovi registrirani na programskom području: hrvatske županije Dubrovačko-neretvanska, Istarska, Karlovačka, Ličko-senjska, Primorsko-goranska, Splitsko-dalmatinska, Šibensko-kninska i Zadarska te talijanske regije Abruzzo, Apulija, Emilia-Romagna, Furlanija-Julijska krajina, Marche, Molise i Veneto; najmanje jedan hrvatski i jedan talijanski poduzetnik, najviše tri partnera.",
+   "sto_financira": "Razvoj, testiranje i komercijalizacija inovativnih rješenja u plavom gospodarstvu (prerada i distribucija proizvoda ribarstva i akvakulture, desalinizacija, obnovljiva energija iz mora i srodne pomorske industrije).",
+   "iznos": "bespovratno od 80.000 do 125.000 € po projektu (najviše 62.500 € po pojedinom MSP-u), ukupni proračun projekta od 100.000 do 156.250 €; alokacija 2.050.000 € (1.640.000 € EFRR i 410.000 € nacionalna sredstva); do 80 % ukupnih prihvatljivih troškova malog projekta, najmanje 20 % privatnog sufinanciranja; svaki partner nosi najmanje 20 % proračuna",
+   "status": "otvoren",
+   "rok": "2026-11-09",
+   "rok_tekst": "1. rok 9.11.2026. u 23:59 (CEST); ako sredstva ne budu iskorištena, 2. rok 8.1.2027. i 3. rok 8.3.2027. u 23:59; prijava isključivo preko platforme https://cbchb.eu/application/ (tekst poziva i upute: cbchb.eu/cbc-it-cro/seas/project-documentation/)",
+   "objavljen": "2026-10-08",
+   "link": "https://www.italy-croatia.eu/web/italy-croatia/dettaglio-news?articleId=29779927&groupId=26940815",
+   "tema": [
+    "inovacije",
+    "internacionalizacija",
+    "okoliš"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "b-light-2-prvi-poziv-za-light-projekte-interreg-vi-a-madarska",
+   "zemlja": "EU",
+   "tijelo": "HAMAG-BICRO (vodeći partner strateškog projekta B Light 2); program Interreg VI-A Mađarska-Hrvatska 2021.-2027.",
+   "program": "Interreg VI-A Mađarska-Hrvatska 2021.-2027. (EFRR)",
+   "naziv": "B Light 2, prvi poziv za Light projekte (Interreg VI-A Mađarska-Hrvatska) (B Light 2, 1st Call for Light Project Proposals)",
+   "za_koga": [
+    "firme"
+   ],
+   "za": "Mikro, mala i srednja poduzeća (Prilog I. Uredbe 651/2014; partnerska i povezana poduzeća ne mogu u isti projekt) sa sjedištem ili podružnicom u programskom području: najmanje 2 i najviše 4 Light partnera, barem jedan iz Hrvatske i jedan iz Mađarske, uz moguće sudjelovanje istraživačkih organizacija u zajedničkim inovacijama; programsko područje po tekstu poziva: mađarske županije Zala, Somogy i Baranya te hrvatske Međimurska, Varaždinska, Koprivničko-križevačka, Bjelovarsko-bilogorska, Virovitičko-podravska, Požeško-slavonska, Osječko-baranjska i Vukovarsko-srijemska; trajanje projekta 6 do 12 mjeseci.",
+   "sto_financira": "Prekogranična poslovna suradnja MSP-ova: razvoj poslovnih modela, zajedničke inovacije, novi proizvodi, usluge i tehnologije, nabava opreme i IT opreme, ulazak na nova tržišta, vanjska stručna pomoć.",
+   "iznos": "do 300.000 € EU sufinanciranja po projektu (prihvatljivi troškovi od 75.000 do 375.000 €); ukupno 3.751.050,94 € EFRR za prvi poziv; do 80 % ukupne vrijednosti projekta (svaki partner osigurava 20 % vlastitog sufinanciranja)",
+   "status": "otvoren",
+   "rok": "2026-11-23",
+   "rok_tekst": "Od 24.9. do 23.11.2026. (sat nije naveden ni u dokumentu poziva ni u Smjernicama za prijavitelje); prijava online na cbchb.eu/application",
+   "objavljen": "2026-09-24",
+   "link": "https://hamagbicro.hr/bespovratne-potpore/b-light-2/",
+   "tema": [
+    "inovacije",
+    "internacionalizacija",
+    "proizvodnja"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "netzerocities-enabling-city-transformation-2-nzc-ect2-poziv-za",
+   "zemlja": "EU",
+   "tijelo": "Konzorcij NetZeroCities (vodi EIT Climate-KIC) u okviru Misije EU-a 100 klimatski neutralnih i pametnih gradova; objavljen i na F&T portalu",
+   "program": "Obzor Europa, Misija Klimatski neutralni i pametni gradovi (financijska potpora trećim stranama)",
+   "naziv": "NetZeroCities Enabling City Transformation 2 (NZC ECT2), poziv za Mission gradove (NZC-SGA3-HE-202608)",
+   "za_koga": [
+    "javna tijela"
+   ],
+   "za": "Samo gradske uprave koje su označene kao Mission gradovi u Misiji 100 klimatski neutralnih i pametnih gradova do 2030. (iz Hrvatske Zagreb); konzorcij od najmanje dvije organizacije, jedna je uprava Mission grada; više Mission gradova može se prijaviti zajedno.",
+   "sto_financira": "Program od 22 mjeseca (travanj 2027. do siječanj 2029.) za uklanjanje sustavnih prepreka i skaliranje klimatske transformacije cijelog grada u jednom od izazovnih područja.",
+   "iznos": "Podgrant od najmanje 500.000 € do najviše 1.500.000 € po prijedlogu (omotnice prema broju Mission gradova); ukupno 8 mil. €; Podgrant se isplaćuje prema stvarno nastalim troškovima (pravila Obzora Europa)",
+   "status": "otvoren",
+   "rok": "2026-12-03",
+   "rok_tekst": "Otvoren 31. kolovoza 2026. u 12:00 CET, rok 3. prosinca 2026. (četvrtak) u 12:00 CET; bez produljenja.",
+   "objavljen": "2026-08-31",
+   "link": "https://netzerocities.eu/wp-content/uploads/2026/08/NZC-SGA3-ECT2-call-guidelines.pdf",
+   "tema": [
+    "energija",
+    "okoliš",
+    "infrastruktura"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "inovacije-procesa-u-s3-podrucjima",
+   "zemlja": "Hrvatska",
+   "tijelo": "MINGO (Program Konkurentnost i kohezija 2021.–2027.)",
+   "program": "EFRR, Program Konkurentnost i kohezija 2021.–2027.",
+   "naziv": "Inovacije procesa u S3 područjima (PK.1.3.11)",
+   "za_koga": [
+    "firme"
+   ],
+   "za": "Mikro, mali i srednji poduzetnici (pravne ili fizičke osobe) koji djelatnost obavljaju u sektoru C Prerađivačka industrija (NKD 2025.); prijavitelj djeluje samostalno, partneri nisu dopušteni.",
+   "sto_financira": "Komercijalizacija inovativnih proizvoda ili usluga novih na tržištu (TRL 7 i više) u S3 tematskim područjima kroz inovacije procesa i organizacije poslovanja, s naglaskom na digitalizaciju i zelenu tranziciju, te usavršavanje djelatnika.",
+   "iznos": "od 150.000 do 450.000 € po projektu; ukupno 17.188.524,40 €; do 50 % za potpore za inovacije procesa i organizacije poslovanja (čl. 29 GBER) i potpore za inovacije za MSP-ove (čl. 28 GBER); do 75 % za potpore male vrijednosti",
+   "status": "otvoren",
+   "rok": "2026-12-31",
+   "rok_tekst": "Zaprimanje od 1.9.2026. u 11:00 do 31.12.2026. u 11:00 ili do iskorištenja sredstava; eKohezija",
+   "objavljen": "2026-07-10",
+   "link": "https://eufondovi.gov.hr/poziv/?id=9781e871-c264-423a-b706-dc2f1cdb407f",
+   "tema": [
+    "inovacije",
+    "digitalizacija",
+    "proizvodnja"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "inovacijski-vauceri-za-msp-ove",
+   "zemlja": "Hrvatska",
+   "tijelo": "MINGO (Program Konkurentnost i kohezija 2021.–2027.)",
+   "program": "EFRR, Program Konkurentnost i kohezija 2021.–2027.",
+   "naziv": "Inovacijski vaučeri za MSP-ove (PK.1.1.06)",
+   "za_koga": [
+    "firme"
+   ],
+   "za": "Mikro, mali i srednji poduzetnici (pravne ili fizičke osobe); uslugu pruža znanstveno-istraživačka organizacija s dopusnicom za znanstvenu djelatnost u RH (ili istraživačka infrastruktura, infrastruktura za testiranje, digitalni inovacijski centar, inovacijski klaster).",
+   "sto_financira": "Usluge istraživačkih organizacija: testiranje, ispitivanje, demonstracijske aktivnosti i stručno tehničko znanje za razvoj i komercijalizaciju novog proizvoda, usluge ili procesa.",
+   "iznos": "od 2.000 do 10.000 € po projektu; ukupno 4.874.214 €; do 85 % prihvatljivih troškova, uz uvjet da ukupna potpora za savjetodavne i pomoćne usluge za inovacije ne prelazi 220.000 € po poduzetniku u bilo kojem trogodišnjem razdoblju",
+   "status": "otvoren",
+   "rok": "2026-12-31",
+   "rok_tekst": "Do 31.12.2026. u 16:00 ili do iskorištenja sredstava; zaprimanje od 10.6.2024. u 11:00; eKohezija",
+   "objavljen": "2024-05-07",
+   "link": "https://eufondovi.gov.hr/poziv/?id=76f3e722-89ee-4a1c-972b-9a89560858d0",
+   "tema": [
+    "inovacije",
+    "istraživanje"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "jacanje-regionalnog-ekosustava-za-poduzetnike-na-potpomognutim",
+   "zemlja": "Hrvatska",
+   "tijelo": "Ministarstvo regionalnoga razvoja i fondova Europske unije (Integrirani teritorijalni program 2021.–2027.)",
+   "program": "EFRR, Integrirani teritorijalni program 2021.–2027.",
+   "naziv": "Jačanje regionalnog ekosustava za poduzetnike na potpomognutim i brdsko-planinskim područjima (IP.1.2.06)",
+   "za_koga": [
+    "firme",
+    "javna tijela",
+    "ustanove"
+   ],
+   "za": "Jedinice lokalne i područne (regionalne) samouprave (Grad Zagreb nije prihvatljiv), poduzetničke potporne institucije u javnom vlasništvu (razvojne agencije, poduzetnički centri, digitalni inovacijski centri, poslovni i poduzetnički inkubatori, inkubatori za nove tehnologije, akceleratori, poslovni i znanstveno-tehnologijski parkovi, centri kompetencije) i poduzetnici svih veličina; PPI i poduzetnici moraju imati poslovnu jedinicu ili podružnicu na brdsko-planinskom ili potpomognutom području Jadranske, Panonske ili Sjeverne Hrvatske u trenutku plaćanja potpore; moguć jedan partner (JLS, JP(R)S ili javna PPI); infrastruktura mora biti upisana u Jedinstveni registar poduzetničke infrastrukture najkasnije godinu dana po završetku projekta.",
+   "sto_financira": "Gradnja i/ili preuređenje te opremanje poduzetničke infrastrukture koja služi za pružanje usluga MSP-ovima u procesu industrijske tranzicije.",
+   "iznos": "od 500.000 do 6.000.000 € po projektu; ukupno 66.000.000 €; do 100 % izračunatog financijskog jaza (čl. 56 GBER, potpore za ulaganje u lokalnu infrastrukturu); iznos i intenzitet računaju se Obrascem 04. Izračun financijskog jaza, projekti s intenzitetom iznad 100 % jaza nisu prihvatljivi",
+   "status": "otvoren",
+   "rok": "2026-12-31",
+   "rok_tekst": "Zaprimanje od 8.10.2026. u 11:00 (prema eKoheziji; prvotno od 1.10.2026.) do 31.12.2026. u 11:00; eKohezija",
+   "objavljen": "2026-07-13",
+   "link": "https://eufondovi.gov.hr/poziv/?id=1be21c2b-a391-4b2b-a8df-0cc30428ff3e",
+   "tema": [
+    "infrastruktura",
+    "proizvodnja"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "koristenje-obnovljivih-izvora-energije-u-sektoru-primarne",
+   "zemlja": "Hrvatska",
+   "tijelo": "MZOZT (Ministarstvo zaštite okoliša i zelene tranzicije) s FZOEU; prijave se šalju FZOEU",
+   "program": "Fond za modernizaciju (Modernizacijski fond)",
+   "naziv": "Korištenje obnovljivih izvora energije u sektoru primarne poljoprivredne proizvodnje i prerade poljoprivrednih proizvoda (MF-2026-6-1)",
+   "za_koga": [
+    "firme",
+    "poljoprivreda"
+   ],
+   "za": "Mikro, mali, srednji i veliki poduzetnici: poljoprivrednici upisani u Upisnik poljoprivrednika s djelatnošću NKD 2025 A01 (biljna i stočarska proizvodnja, uzgoj sadnog materijala, mješovita poljoprivreda, pomoćne djelatnosti) ili fizičke i pravne osobe registrirane za preradu poljoprivrednih proizvoda s djelatnošću C10 Proizvodnja prehrambenih proizvoda (skupine navedene u Pozivu).",
+   "sto_financira": "Izgradnja ili dogradnja integriranih i neintegriranih fotonaponskih elektrana (A1) i sustavi za skladištenje električne energije, baterije, uz fotonaponsku elektranu (A2), uz projektantski i stručni nadzor te upravljanje projektom. Aktivnosti ne smiju početi prije prijave.",
+   "iznos": "od 5.000,00 € po projektu do 5.000.000,00 € po prijavitelju (za jedan ili više projekata); ukupno 30.000.000,00 € (20.000.000,00 € mikro i mala, 10.000.000,00 € srednja i velika poduzeća); ulaganja u proizvodnju OIE: 65,00 % mikro i mala, 55,00 % srednja, 45,00 % velika poduzeća; skladištenje energije: 50,00 %, 40,00 %, 30,00 %",
+   "status": "otvoren",
+   "rok": "2027-01-31",
+   "rok_tekst": "Poziv službeno objavljen 7.10.2026.; zaprimanje projektnih prijedloga od 9.11.2026. u 10:00 do 31.1.2027. u 12:00 ili do iskorištenja sredstava (prijava preporučenom poštom FZOEU-u, Radnička cesta 80, Zagreb)",
+   "objavljen": "2026-10-07",
+   "link": "https://www.fzoeu.hr/hr/natjecaj/7539?nid=274",
+   "tema": [
+    "energija",
+    "poljoprivreda"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "integrator",
+   "zemlja": "Hrvatska",
+   "tijelo": "MINGO (Program Konkurentnost i kohezija 2021.–2027.)",
+   "program": "EFRR, Program Konkurentnost i kohezija 2021.–2027.",
+   "naziv": "INTEGRATOR (PK.1.3.08)",
+   "za_koga": [
+    "firme"
+   ],
+   "za": "Konzorcij od najmanje 3 mikro, mala ili srednja poduzetnika (prijavitelj i najmanje 2 partnera MSP-a) koji ulazi u lanac vrijednosti srednjeg ili velikog poduzeća (integratora) prisutnog na više tržišta.",
+   "sto_financira": "Komercijalizacija inovativnih proizvoda ili usluga (TRL 7 i više) u S3 tematskim područjima kroz inovacije procesa i organizacije poslovanja konzorcija MSP-ova, radi dugoročnih dobavljačkih odnosa s integratorom.",
+   "iznos": "od 300.000 do 820.000 € po projektu; ukupno 13.868.360 €; do 50 % (čl. 28 i 29 GBER); do 75 % za potpore male vrijednosti",
+   "status": "obustavljen",
+   "rok": "2026-12-31",
+   "rok_tekst": "Zaprimanje od 5.5.2026. u 11:00; privremeno obustavljeno, obustava produljena do 3.11.2026. u 11:00 (obavijest MINGO-a od 29.9.2026.); krajnji rok 31.12.2026. u 11:00 ili do iskorištenja sredstava",
+   "objavljen": "2025-12-24",
+   "link": "https://eufondovi.gov.hr/poziv/?id=8429cf0a-4d19-4aff-be28-874ea9dc420b",
+   "tema": [
+    "inovacije",
+    "proizvodnja"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "potpore-male-vrijednosti-za-izgradnju-fotonaponskih-elektrana",
+   "zemlja": "Hrvatska",
+   "tijelo": "Karlovačka županija, Upravni odjel za gospodarstvo",
+   "program": "proračun Karlovačke županije 2025. s projekcijama za 2026. i 2027.",
+   "naziv": "Potpore male vrijednosti za izgradnju fotonaponskih elektrana za vlastite potrebe u gospodarstvu (Karlovačka županija) (KLASA: 302-02/25-02/2)",
+   "za_koga": [
+    "firme"
+   ],
+   "za": "Mikro, mali i srednji subjekti malog gospodarstva (trgovačka društva i obrtnici) s poslovnom jedinicom u Karlovačkoj županiji, pretežite djelatnosti NKD 2007 područje C (osim 11, 12 i 25.4), F, G 45.2, H te I 55.1 i 55.3; potpora male vrijednosti.",
+   "sto_financira": "Projektno-tehnička dokumentacija i izgradnja fotonaponske elektrane za vlastitu potrošnju.",
+   "iznos": "elektrana do 20.000 € i dokumentacija do 2.500 € po subjektu; ukupno 300.000 €; do 70 % vrijednosti ulaganja u elektranu, do 100 % za dokumentaciju",
+   "status": "trajno otvoren do iskorištenja",
+   "rok": "2027-06-30",
+   "rok_tekst": "Prijave od 11.2.2025. do 30.6.2027. ili do iskorištenja sredstava, isključivo kroz sustav SOM e-prijave.",
+   "objavljen": "2025-02-11",
+   "link": "https://kazup.hr/images/dokumenti/gospodarstvo/2025/energetika/Javni_poziv.pdf",
+   "tema": [
+    "energija"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "krediti-za-energetsku-ucinkovitost-poduzetnika",
+   "zemlja": "Hrvatska",
+   "tijelo": "HBOR (preko poslovnih banaka)",
+   "program": "PKK 2021.-2027. (EFRR 50 %) i sredstva poslovnih banaka (50 %)",
+   "naziv": "Krediti za energetsku učinkovitost poduzetnika",
+   "za_koga": [
+    "firme"
+   ],
+   "za": "Subjekti bez obzira na pravni oblik registrirani najmanje godinu dana prije zahtjeva za djelatnost u proizvodnoj industriji (NKD 2007 područja B, C, D) ili komercijalnom i uslužnom sektoru (NKD 2007 područja G, I, L, N), s poslovnom jedinicom ili podružnicom u Hrvatskoj.",
+   "sto_financira": "Kredit za mjere energetske učinkovitosti i obnovljive izvore energije, uz najmanju uštedu energije 20 % (industrija) odnosno 30 % (komercijalni sektor).",
+   "iznos": "do 3.000.000 €; nije primjenjivo (kredit); kamata na EFRR dio 0,00 % fiksno, na dio banke prema odluci banke; otplata do 17 godina uključujući poček do 3 godine; otpis (kapitalni rabat) do 50 % iz EFRR sredstava uz kriterije",
+   "status": "trajno otvoren do iskorištenja",
+   "rok": "",
+   "rok_tekst": "Zaprimanje otvoreno preko poslovnih banaka; rok nije objavljen.",
+   "objavljen": "",
+   "link": "https://www.hbor.hr/krediti-za-energetsku-ucinkovitost-poduzetnika/2451",
+   "tema": [
+    "krediti",
+    "energija"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "krediti-za-modernizaciju-proizvodnje",
+   "zemlja": "Hrvatska",
+   "tijelo": "HBOR",
+   "program": "PKK 2021.-2027. (EFRR) i sredstva HBOR-a, omjer 50:50",
+   "naziv": "Krediti za modernizaciju proizvodnje",
+   "za_koga": [
+    "firme"
+   ],
+   "za": "Mikro, mali i srednji poduzetnici privatnog sektora registrirani za prerađivačku industriju (NKD 2025, područje C), s poslovnom jedinicom u Hrvatskoj.",
+   "sto_financira": "Kredit za osnovna sredstva za novu jedinicu, proširenje, diversifikaciju ili temeljitu promjenu proizvodnog procesa, uključujući digitalizaciju; obrtna sredstva do 30 % kredita; do 85 % investicije (75 % uz regionalnu potporu).",
+   "iznos": "od 100.000 do 3.000.000 €; nije primjenjivo (kredit); kamata na EFRR dio 0,00 % fiksno, na HBOR dio prema procjeni rizika; otplata do 15 godina s počekom do 3 godine; otpis (kapitalni rabat) do 50 % isplaćene glavnice iz EFRR dijela uz kriterije iz Priloga 2",
+   "status": "trajno otvoren do iskorištenja",
+   "rok": "",
+   "rok_tekst": "Zahtjevi se zaprimaju od 29.1.2025. isključivo elektronički; krediti se isplaćuju do 31.12.2029.",
+   "objavljen": "2025-01-29",
+   "link": "https://www.hbor.hr/krediti-za-modernizaciju-proizvodnje-1726/1726",
+   "tema": [
+    "krediti",
+    "proizvodnja",
+    "digitalizacija"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "nacionalni-jamstveni-program-plus",
+   "zemlja": "Hrvatska",
+   "tijelo": "HAMAG-BICRO",
+   "program": "nacionalna sredstva (HAMAG-BICRO)",
+   "naziv": "Nacionalni jamstveni program PLUS",
+   "za_koga": [
+    "firme"
+   ],
+   "za": "Mali i srednji poduzetnici s kvalitetnim poslovnim idejama koji ne ispunjavaju uvjete banaka u pogledu instrumenata osiguranja povrata kredita; osiguranje su zadužnice društva i vlasnika.",
+   "sto_financira": "Mjera A: jamstvo za investicije (obrtna sredstva do 30 % kredita); Mjera B: jamstvo za obrtna sredstva (100 % kredita).",
+   "iznos": "jamstvo do 2.000.000 € (mjera A) odnosno do 1.000.000 € (mjera B); alokacija nije objavljena; Stopa jamstva do 80 % (mjera A) odnosno do 50 % (mjera B); najkraće trajanje 1 godina; premija rizika 0,25 do 0,5 % (A) i 0,5 do 1 % (B) iznosa jamstva",
+   "status": "trajno otvoren do iskorištenja",
+   "rok": "",
+   "rok_tekst": "Program aktivan prema stranici HAMAG-a; rok nije objavljen",
+   "objavljen": "",
+   "link": "https://hamagbicro.hr/financijski-instrumenti/kako-do-jamstva/nacionalna-jamstva/plus/",
+   "tema": [
+    "krediti"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "eurostars-3-poziv-12-hrvatski-sudionici-preko-hamag-bicro-a",
+   "zemlja": "EU",
+   "tijelo": "Eureka i Europska komisija (Obzor Europa); za hrvatske prijavitelje nacionalno tijelo HAMAG-BICRO",
+   "program": "Eurostars-3 (Europsko partnerstvo za inovativne MSP-ove, Obzor Europa i nacionalna sredstva HAMAG-BICRO-a)",
+   "naziv": "Eurostars-3, poziv 12 (hrvatski sudionici preko HAMAG-BICRO-a) (Eurostars-3 Call 12)",
+   "za_koga": [
+    "firme",
+    "ustanove"
+   ],
+   "za": "Konzorcij koji vodi inovativni MSP iz Eurostars zemlje: najmanje dva neovisna subjekta iz najmanje dvije Eurostars zemlje (barem jedan iz EU-a ili zemlje pridružene Obzoru Europa), MSP-ovi iz Eurostars zemalja nose 50 % ili više troškova projekta bez podugovaranja, nijedan sudionik ni zemlja iznad 70 %, trajanje 36 mjeseci ili kraće, isključivo civilna primjena; u Hrvatskoj se financiraju MSP-ovi, a velika poduzeća i istraživačke organizacije sudjeluju samo kao podizvođači hrvatskih poduzeća.",
+   "sto_financira": "Zajednički međunarodni projekt istraživanja i razvoja novog proizvoda, usluge ili procesa.",
+   "iznos": "za hrvatske sudionike najviše 300.000 € bespovratno po projektu (ako je više hrvatskih sudionika, iznos se dijeli među njima); podatak sa stranice poziva 12 na eurekanetwork.org (odjeljak o Hrvatskoj), HAMAG-ovi nacionalni uvjeti za poziv 12 još nisu objavljeni; do 60 % troškova za mikro i mala, do 50 % za srednja poduzeća (odjeljak o Hrvatskoj na stranici poziva 12 Eureke; isti uvjeti vrijedili su za poziv 11); velika poduzeća i istraživačke organizacije iz Hrvatske bez financiranja, mogu sudjelovati samofinancirano ili kao podizvođači",
+   "status": "najavljen",
+   "rok": "2027-03-04",
+   "rok_tekst": "Poziv se otvara 17. prosinca 2026. u 00:00 CET; rok za prijavu 4. ožujka 2027. u 14:00 CET. Provjera prihvatljivosti u tjednu nakon roka, pravna i financijska provjera sredinom travnja 2027., rang-lista neovisnog panela krajem svibnja 2027., odluka o financiranju do sredine lipnja 2027.",
+   "objavljen": "",
+   "link": "https://www.eurekanetwork.org/programmes-and-calls/eurostars/eurostars-call-12-for-projects-deadline-march-2027/",
+   "tema": [
+    "inovacije",
+    "internacionalizacija",
+    "istraživanje"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "european-city-facility-life-eucf-3-0-8-poziv",
+   "zemlja": "EU",
+   "tijelo": "Konzorcij European City Facility (Energy Cities, Climate Alliance, FEDARENE, Adelphi, Enviros); financira LIFE (CINEA)",
+   "program": "LIFE, prijelaz na čistu energiju (European City Facility)",
+   "naziv": "European City Facility (LIFE EUCF 3.0), 8. poziv (EUCF Call 8)",
+   "za_koga": [
+    "javna tijela"
+   ],
+   "za": "Gradovi, općine i lokalne vlasti te njihova udruženja iz EU-27, Ukrajine i Islanda, a od novih poziva i iz Crne Gore, Moldavije i Sjeverne Makedonije, koji imaju SECAP ili sličnu strategiju i pripremaju investicijski koncept za održivu energiju (uključeni i lokalni planovi grijanja i hlađenja).",
+   "sto_financira": "Izradu investicijskog koncepta (investment concept) za projekte energetske učinkovitosti i obnovljive energije u lokalnoj zajednici, uz stručnu podršku.",
+   "iznos": "60.000 € po korisniku; 185 korisnika; ukupno 11,1 mil. € (FEDARENE, 31.7.2026.)",
+   "status": "najavljen",
+   "rok": "",
+   "rok_tekst": "Službena stranica EUCF-a (30.7.2026.): poziv 8 očekuje se u listopadu 2026., više će biti objavljeno tada; prema FEDARENE-u poziv će biti otvoren dva mjeseca, a daljnji pozivi planiraju se za proljeće i jesen 2027. Na dan 8.10.2026. poziv još nije otvoren.",
+   "objavljen": "2026-07-30",
+   "link": "https://www.eucityfacility.eu/calls",
+   "tema": [
+    "energija",
+    "okoliš"
+   ],
+   "istaknuto": true
+  },
+  {
+   "id": "jacanje-step-strateskih-partnerstva-za-inovacije-u-procesu",
+   "zemlja": "Hrvatska",
+   "tijelo": "Ministarstvo regionalnoga razvoja i fondova Europske unije (Integrirani teritorijalni program 2021.–2027.)",
+   "program": "EFRR, Integrirani teritorijalni program 2021.–2027. (STEP, Platforma za strateške tehnologije za Europu)",
+   "naziv": "Jačanje STEP strateških partnerstva za inovacije u procesu industrijske tranzicije (STEP SPIN)",
+   "za_koga": [
+    "firme",
+    "ustanove"
+   ],
+   "za": "Konzorcij najmanje dva nepovezana poduzetnika, barem jedan MSP; nositelj veliko poduzeće ili MSP sa sjedištem ili podružnicom u Panonskoj, Sjevernoj ili Jadranskoj Hrvatskoj (Grad Zagreb nije u obuhvatu); u konzorcij se mogu uključiti organizacije za istraživanje i širenje znanja.",
+   "sto_financira": "Razvoj novih proizvoda i usluga u STEP tehnologijama (digitalne tehnologije i deep tech, čiste i resursno učinkovite tehnologije, biotehnologije, obrambene tehnologije): eksperimentalni razvoj, ulaganja u materijalnu i nematerijalnu imovinu, usavršavanje zaposlenih.",
+   "iznos": "ukupno 145.000.000 € (plan ITP, listopad 2026.); prema nacrtu Uputa na e-savjetovanju od 3.000.000 do 10.000.000 € po projektu, raspodjela Panonska 87 mil. €, Jadranska 44 mil. €, Sjeverna 14 mil. € (sekundarni izvori); indikativno 50 % (plan ITP); prema nacrtu Uputa (sekundarni izvor) eksperimentalni razvoj 60 % mala, 50 % srednja, 40 % velika poduzeća; regionalna potpora za ulaganje 75 %, 70 %, 60 %; usavršavanje 70 %, 60 %, 50 %",
+   "status": "najavljen",
+   "rok": "",
+   "rok_tekst": "indikativno zaprimanje od 30.10.2026. do 31.12.2026. (plan ITP, listopad 2026.); sekundarni izvor (Forvis Mazars) navodi objavu u studenom 2026. i zaprimanje od prosinca 2026. do ožujka 2027.; savjetovanje s javnošću o nacrtu Uputa otvoreno 14.9. do 14.10.2026. (vijest MRRFEU 15.9.2026.)",
+   "objavljen": "2026-09-14",
+   "link": "https://eufondovi.gov.hr/savjetovanje-s-javnoscu-o-uputama-za-prijavitelje-poziva-na-dostavu-projektnih-prijedloga-jacanje-step-strateskih-partnerstva-za-inovacije-u-procesu-industrijske-tranzicije-step-spi/",
+   "tema": [
+    "inovacije",
+    "istraživanje",
+    "proizvodnja"
+   ],
+   "istaknuto": true
+  }
+ ]
 }
 </script>
 <script>
-  // Vrtuljak aktualnih poziva: podaci su u bloku iznad; pozivi s prošlim rokom se ne prikazuju. Bez vanjskih biblioteka.
-  (function () {
-    var data = JSON.parse(document.getElementById('pozivi-data').textContent);
+  // Vrtuljak aktualnih natječaja: podaci iz pozivi.json (rezerva: blok iznad); prošli rokovi se ne prikazuju; Crna Gora je na stranici natječaja. Bez vanjskih biblioteka.
+  function pokreniVrtuljak(data) {
     var danas = new Date(); danas.setHours(0, 0, 0, 0);
-    var aktivni = data.pozivi.filter(function (p) { return new Date(p.rok + 'T23:59:59') >= danas; })
-      .sort(function (a, b) { return a.rok < b.rok ? -1 : 1; });
+    // na naslovnici: istaknuti pozivi (otvoreni po roku, pa najave), najviše 14; cijeli popis je na stranici natječaja
+    var ziv = data.pozivi.filter(function (p) { return p.zemlja !== 'Crna Gora' && (!p.rok || new Date(p.rok + 'T23:59:59') >= danas); });
+    var red = function (p) { return p.status === 'najavljen' ? 2 : (p.rok ? 0 : 1); };
+    var srt = function (a, b) { var d = red(a) - red(b); if (d) return d; var ra = a.rok || '9999-12-31', rb = b.rok || '9999-12-31'; return ra < rb ? -1 : (ra > rb ? 1 : 0); };
+    var aktivni = ziv.filter(function (p) { return p.istaknuto; }).sort(srt);
+    if (aktivni.length < 6) aktivni = ziv.filter(function (p) { return p.status !== 'najavljen'; }).sort(srt);
+    aktivni = aktivni.slice(0, 14);
+    window.__brojPoziva = data.pozivi.filter(function (p) { return !p.rok || new Date(p.rok + 'T23:59:59') >= danas; }).length;
     var track = document.getElementById('track'), dots = document.getElementById('dots'), note = document.getElementById('cnote');
     function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
     function dana(rok) { return Math.round((new Date(rok + 'T00:00:00') - danas) / 86400000); }
-    function oznaka(d) { if (d <= 0) return 'rok je danas'; var jedan = d % 10 === 1 && d % 100 !== 11; return 'još ' + d + (jedan ? ' dan' : ' dana'); }
-    if (!aktivni.length) { track.innerHTML = '<div class="cempty">Trenutno nema otvorenih poziva na popisu. Javite se, pratimo najave.</div>'; return; }
+    function oznaka(p) {
+      if (p.status === 'najavljen') return 'najava';
+      if (!p.rok) return 'do iskorištenja';
+      var d = dana(p.rok); if (d <= 0) return 'rok je danas'; var jedan = d % 10 === 1 && d % 100 !== 11; return 'još ' + d + (jedan ? ' dan' : ' dana');
+    }
+    if (!aktivni.length) { track.innerHTML = '<div class="cempty">Trenutno nema otvorenih natječaja na popisu. Javite se, pratimo najave.</div>'; return; }
     aktivni.forEach(function (p) {
-      var d = dana(p.rok), hot = d <= 21 ? ' hot' : '';
-      var el = document.createElement('article'); el.className = 'slide';
-      el.innerHTML = '<div class="tag"><span>' + esc(p.zemlja) + ', ' + esc(p.tijelo) + '</span><span class="cnt' + hot + '">' + oznaka(d) + '</span></div>' +
-        '<h3>' + esc(p.naziv) + '</h3>' +
-        '<p class="fact"><b>Za koga:</b> ' + esc(p.za) + '</p>' +
-        '<p class="fact"><b>Koliko:</b> ' + esc(p.iznos) + '</p>' +
-        '<div class="rok"><b>Rok:</b> ' + esc(p.rok_tekst) + '</div>' +
-        '<div class="acts"><a class="btn" href="#kontakt">Pitajte za ovaj poziv</a><a class="link" href="' + esc(p.link) + '" target="_blank" rel="noopener">Službena stranica</a></div>';
+      var d = p.rok ? dana(p.rok) : 999, hot = (d <= 21 && p.status !== 'najavljen') ? ' hot' : '';
+      var el = document.createElement('article'); el.className = 'slide slide-sc in';
+      var url = 'natjecaj.html?id=' + encodeURIComponent(p.id || '');
+      el.innerHTML = '<a class="slide-slika" href="' + url + '" aria-label="' + esc(p.naziv) + '">' + (window.SCENE ? SCENE.html(p, { klasa: 'nk-scena' }) : '') + '<span class="nk-status' + (hot ? ' hot' : '') + '">' + oznaka(p) + '</span></a>' +
+        '<div class="slide-tijelo"><div class="tag"><span>' + esc(p.zemlja === 'EU' ? 'Program EU' : 'Hrvatska') + ', ' + esc(p.tijelo) + '</span></div>' +
+        '<h3><a href="' + url + '">' + esc(p.naziv) + '</a></h3>' +
+        '<p class="fact"><b>Koliko:</b> ' + esc(window.NAT ? NAT.kratko(p.iznos, 110) : p.iznos) + '</p>' +
+        '<div class="rok"><b>Rok:</b> ' + esc(p.rok ? (window.NAT ? NAT.datum(p.rok) : p.rok) : (p.status === 'najavljen' ? 'najava' : 'do iskorištenja sredstava')) + '</div>' +
+        '<div class="acts"><a class="btn" href="' + url + '">Detalji</a><a class="link" href="#kontakt">Pitajte nas</a></div></div>';
       track.appendChild(el);
     });
+    if (window.SCENE) SCENE.aktiviraj(track);
     note.textContent = 'Stanje ' + data.stanje + ' Rokovi i uvjeti provjereni u službenoj dokumentaciji; prije prijave ih ponovno provjeravamo.';
     var slides = Array.prototype.slice.call(track.children), idx = 0, timer = null, pauza = false;
     slides.forEach(function (s, i) { var b = document.createElement('button'); b.setAttribute('aria-label', 'Poziv ' + (i + 1)); b.addEventListener('click', function () { idi(i, true); }); dots.appendChild(b); });
@@ -217,17 +805,62 @@
     track.addEventListener('mouseenter', stop); track.addEventListener('mouseleave', start);
     track.addEventListener('touchstart', stop, { passive: true }); track.addEventListener('focusin', stop); track.addEventListener('focusout', start);
     oboji(); start();
+  }
+  (function () {
+    var rezerva = JSON.parse(document.getElementById('pozivi-data').textContent);
+    fetch('pozivi.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(pokreniVrtuljak).catch(function () { pokreniVrtuljak(rezerva); });
   })();
 </script>
 <script>
-  // Otkrivanje na pomak: elementi s klasom reveal dobivaju klasu in kad uđu u vidno polje. Bez vanjskih biblioteka.
+  // Otkrivanje na pomak, riječ koja se mijenja, sjaj koji prati miš, brojke koje se odbrojavaju. Bez vanjskih biblioteka.
   (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // brojke: broj rokova dolazi iz vrtuljka (čita se u trenutku prikaza, jer se podaci učitavaju asinkrono)
+    function broji(el) {
+      if (el.id === 'num-pozivi' && typeof window.__brojPoziva === 'number') el.setAttribute('data-to', window.__brojPoziva);
+      var to = parseInt(el.getAttribute('data-to'), 10) || 0;
+      if (reduce) { el.textContent = to; return; }
+      var start = null, dur = 1400;
+      function step(ts) { if (!start) start = ts; var p = Math.min((ts - start) / dur, 1); var e = 1 - Math.pow(1 - p, 3); el.textContent = Math.round(to * e); if (p < 1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    }
+
+    // otkrivanje
     var els = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-    els.forEach(function (e) { io.observe(e); });
+    function pokazi(e) { e.classList.add('in'); e.querySelectorAll('.num').forEach(broji); }
+    if (!('IntersectionObserver' in window)) { els.forEach(pokazi); }
+    else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { if (en.isIntersecting) { pokazi(en.target); io.unobserve(en.target); } });
+      }, { threshold: 0.05, rootMargin: '0px 0px -5% 0px' });
+      els.forEach(function (e) { io.observe(e); });
+    }
+
+    // riječ koja se mijenja
+    var rot = document.getElementById('rot');
+    if (rot && !reduce) {
+      var rijeci = ['firmama', 'startupima', 'gradovima i općinama', 'javnim ustanovama', 'obrtima i OPG-ovima'], ri = 0;
+      setInterval(function () {
+        rot.classList.add('out');
+        setTimeout(function () {
+          ri = (ri + 1) % rijeci.length; rot.textContent = rijeci[ri];
+          rot.classList.remove('out'); rot.classList.add('pre'); void rot.offsetWidth; rot.classList.remove('pre');
+        }, 450);
+      }, 3400);
+    }
+
+    // sjaj prati miš (samo s mišem, ne na dodir)
+    var hero = document.querySelector('.hero'), gw = document.getElementById('glowwrap');
+    if (hero && gw && !reduce && window.matchMedia('(hover: hover)').matches) {
+      hero.addEventListener('mousemove', function (e) {
+        var r = hero.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+        gw.style.transform = 'translate3d(' + (x * 28).toFixed(1) + 'px,' + (y * 18).toFixed(1) + 'px,0)';
+      });
+      hero.addEventListener('mouseleave', function () { gw.style.transform = ''; });
+    }
+
     // zatvori mobilni izbornik nakon klika
     document.querySelectorAll('#menu a').forEach(function (a) { a.addEventListener('click', function () { document.getElementById('menu').classList.remove('open'); }); });
   })();

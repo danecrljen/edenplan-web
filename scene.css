@@ -1,0 +1,605 @@
+/* Animirane scene natječaja, EdenPlan. Generirano iz _scene_src/ skriptom gradi.py (2026-10-09). Ne uređivati ovdje. */
+
+/* ---- 00-jezgra.css ---- */
+/* Animirane scene natječaja: okvir i zajedničke animacije. Animacije teku samo pod .scena.play (scena na ekranu). */
+.scena { position: relative; overflow: hidden; background: var(--sc-bg, #f3f6fa); aspect-ratio: 16 / 9; width: 100%; }
+.scena svg { display: block; width: 100%; height: 100%; }
+.scena [class*="sc-"] { transform-box: fill-box; transform-origin: center; }
+.scena .sc-sway { transform-origin: 50% 100%; }
+.scena .sc-grow { transform-origin: 50% 100%; }
+.scena .sc-type { stroke-dasharray: 100; stroke-dashoffset: 0; }
+.scena .sc-flow { stroke-dasharray: 6 8; }
+.scena .sc-flow-brzo { stroke-dasharray: 5 7; }
+
+.scena.play .sc-spin { animation: sc-spin 9s linear infinite; }
+.scena.play .sc-spin-sporo { animation: sc-spin 24s linear infinite; }
+.scena.play .sc-spin-brzo { animation: sc-spin 2.4s linear infinite; }
+.scena.play .sc-spin-obrnuto { animation: sc-spin 9s linear infinite reverse; }
+.scena.play .sc-bob { animation: sc-bob 3.6s ease-in-out infinite; }
+.scena.play .sc-bob-sporo { animation: sc-bob 5.6s ease-in-out infinite; }
+.scena.play .sc-sway { animation: sc-sway 4.5s ease-in-out infinite alternate; }
+.scena.play .sc-drift { animation: sc-drift 14s ease-in-out infinite alternate; }
+.scena.play .sc-flow { animation: sc-flow 1.8s linear infinite; }
+.scena.play .sc-flow-brzo { animation: sc-flow .9s linear infinite; }
+.scena.play .sc-blink { animation: sc-blink 2.4s ease-in-out infinite; }
+.scena.play .sc-blink-sporo { animation: sc-blink 5.5s ease-in-out infinite; }
+.scena.play .sc-tw { animation: sc-tw 2.8s ease-in-out infinite; }
+.scena.play .sc-pulse { animation: sc-pulse 2.6s ease-in-out infinite; }
+.scena.play .sc-grow { animation: sc-grow 2.8s cubic-bezier(.2,.65,.3,1) infinite alternate; }
+.scena.play .sc-rise { animation: sc-rise 3.2s ease-out infinite; }
+.scena.play .sc-roll { animation: sc-spin 2.2s linear infinite; }
+.scena.play .sc-wave { animation: sc-wave 4s ease-in-out infinite alternate; }
+.scena.play .sc-type { animation: sc-type 4.2s cubic-bezier(.2,.65,.3,1) infinite; }
+
+@keyframes sc-spin { to { transform: rotate(360deg); } }
+@keyframes sc-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes sc-sway { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
+@keyframes sc-drift { from { transform: translateX(-18px); } to { transform: translateX(18px); } }
+@keyframes sc-flow { to { stroke-dashoffset: -28; } }
+@keyframes sc-blink { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes sc-tw { 0%, 100% { opacity: .2; } 50% { opacity: 1; } }
+@keyframes sc-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+@keyframes sc-grow { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
+@keyframes sc-rise { 0% { transform: translateY(0) scale(.6); opacity: 0; } 25% { opacity: .95; } 100% { transform: translateY(-34px) scale(1.25); opacity: 0; } }
+@keyframes sc-wave { from { transform: translateX(-10px); } to { transform: translateX(10px); } }
+@keyframes sc-type { 0% { stroke-dashoffset: 100; } 45% { stroke-dashoffset: 0; } 85% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 100; } }
+
+@media (prefers-reduced-motion: reduce) { .scena.play * { animation: none !important; } }
+
+
+/* ---- tema-digitalizacija.css ---- */
+/* Tema digitalizacija: vlastite animacije (teku samo pod .scena.play, kao i animacije jezgre). */
+/* strelica u oblaku lagano plovi gore i natrag (prijenos podataka u oblak) */
+.scena.play .sc-digitalizacija-gore { animation: sc-digitalizacija-gore 2.6s ease-in-out infinite alternate; }
+/* elisa drona: sužava se i širi kao da se okreće */
+.scena.play .sc-digitalizacija-elisa { animation: sc-digitalizacija-elisa 1.2s ease-in-out infinite; }
+
+@keyframes sc-digitalizacija-gore { from { transform: translateY(3px); } to { transform: translateY(-3px); } }
+@keyframes sc-digitalizacija-elisa { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.3); } }
+
+
+/* ---- tema-energija.css ---- */
+/* Tema energija: vlastite animacije (samo pod .scena.play). */
+/* baterija se puni: ćelije se pale odozdo prema gore, drže, pa se zajedno gase */
+.scena.play .sc-energija-b1 { animation: sc-energija-b1 6s ease-in-out infinite both; }
+.scena.play .sc-energija-b2 { animation: sc-energija-b2 6s ease-in-out infinite both; }
+.scena.play .sc-energija-b3 { animation: sc-energija-b3 6s ease-in-out infinite both; }
+@keyframes sc-energija-b1 { 0%, 4% { opacity: .18; } 16%, 86% { opacity: 1; } 96%, 100% { opacity: .18; } }
+@keyframes sc-energija-b2 { 0%, 22% { opacity: .18; } 34%, 86% { opacity: 1; } 96%, 100% { opacity: .18; } }
+@keyframes sc-energija-b3 { 0%, 40% { opacity: .18; } 52%, 86% { opacity: 1; } 96%, 100% { opacity: .18; } }
+/* spremnik topline: razina se polako diže i spušta (od dna) */
+.scena .sc-energija-razina { transform-origin: 50% 100%; }
+.scena.play .sc-energija-razina { animation: sc-energija-razina 6s ease-in-out infinite alternate; }
+@keyframes sc-energija-razina { from { transform: scaleY(.45); } to { transform: scaleY(1); } }
+/* tramvaj mirno vozi lijevo-desno */
+.scena.play .sc-energija-tram { animation: sc-energija-tram 14s ease-in-out infinite alternate; }
+@keyframes sc-energija-tram { from { transform: translateX(-62px); } to { transform: translateX(62px); } }
+/* oblak emisija se polako smanjuje i nestaje */
+.scena.play .sc-energija-emisija { animation: sc-energija-emisija 9s ease-in-out infinite; }
+@keyframes sc-energija-emisija { 0% { transform: scale(1); opacity: 1; } 72% { transform: scale(.56); opacity: .8; } 86% { transform: scale(.48); opacity: 0; } 87% { transform: scale(1); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+/* kantica na skeli ide gore-dolje */
+.scena.play .sc-energija-dizalo { animation: sc-energija-dizalo 7s ease-in-out infinite alternate; }
+@keyframes sc-energija-dizalo { from { transform: translateY(0); } to { transform: translateY(-58px); } }
+
+
+/* ---- tema-infrastruktura.css ---- */
+/* Tema infrastruktura: njihanje i dizanje tereta na kranu, autobus i tramvaj, valjak na cesti, jedrilica, kazaljka sata. Samo pod .scena.play (scena na ekranu).
+   Točka okretanja je lokalno ishodište elementa (transform-box: view-box; transform-origin: 0 0); položaj daje vanjska grupa. */
+.scena.play .sc-infrastruktura-njihaj { transform-box: view-box; transform-origin: 0 0; animation: sc-infrastruktura-njihaj 3.6s ease-in-out infinite alternate; }
+.scena.play .sc-infrastruktura-klati { transform-box: view-box; transform-origin: 0 0; animation: sc-infrastruktura-klati 3.2s ease-in-out infinite alternate; }
+.scena.play .sc-infrastruktura-uze { transform-box: view-box; transform-origin: 0 0; animation: sc-infrastruktura-uze 9s ease-in-out infinite alternate; }
+.scena.play .sc-infrastruktura-dizi { transform-box: view-box; transform-origin: 0 0; animation: sc-infrastruktura-dizi 9s ease-in-out infinite alternate; }
+.scena.play .sc-infrastruktura-kazaljka { transform-box: view-box; transform-origin: 0 0; animation: sc-infrastruktura-krug 40s linear infinite; }
+.scena.play .sc-infrastruktura-ljulja { transform-box: view-box; transform-origin: 0 0; animation: sc-infrastruktura-ljulja 4.4s ease-in-out infinite alternate; }
+/* autobus na stajalištu: dolazi i usporava, stoji, ubrzava i odlazi; kotači se okreću točno koliko autobus prijeđe (760 / 9 rad) */
+.scena.play .sc-infrastruktura-bus { animation: sc-infrastruktura-bus 16s linear infinite; }
+.scena.play .sc-infrastruktura-kotac { transform-box: view-box; transform-origin: 0 0; animation: sc-infrastruktura-kotac 16s linear infinite; }
+/* autobus prelazi most stalnom brzinom */
+.scena.play .sc-infrastruktura-prijelaz { animation: sc-infrastruktura-prijelaz 18s linear infinite; }
+.scena.play .sc-infrastruktura-kotac-l { transform-box: view-box; transform-origin: 0 0; animation: sc-infrastruktura-kotac-l 18s linear infinite; }
+/* valjak ide naprijed i natrag 72 px; valjak (r 34) i kotač (r 24) okreću se točno koliko vozilo prijeđe */
+.scena.play .sc-infrastruktura-valjaj { animation: sc-infrastruktura-valjaj 9s ease-in-out infinite alternate; }
+.scena.play .sc-infrastruktura-valjak { transform-box: view-box; transform-origin: 0 0; animation: sc-infrastruktura-valjak 9s ease-in-out infinite alternate; }
+.scena.play .sc-infrastruktura-kotacv { transform-box: view-box; transform-origin: 0 0; animation: sc-infrastruktura-kotacv 9s ease-in-out infinite alternate; }
+
+@keyframes sc-infrastruktura-njihaj { from { transform: rotate(-2.2deg); } to { transform: rotate(2.2deg); } }
+@keyframes sc-infrastruktura-klati { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+@keyframes sc-infrastruktura-uze { from { transform: scaleY(1); } to { transform: scaleY(.62); } }
+@keyframes sc-infrastruktura-dizi { from { transform: translateY(0); } to { transform: translateY(-22.8px); } }
+@keyframes sc-infrastruktura-krug { to { transform: rotate(360deg); } }
+@keyframes sc-infrastruktura-ljulja { from { transform: rotate(-2.5deg); } to { transform: translateY(-1.5px) rotate(2.5deg); } }
+@keyframes sc-infrastruktura-bus {
+  0% { transform: translateX(-760px); animation-timing-function: cubic-bezier(.16, .56, .32, 1); }
+  38% { transform: translateX(0); }
+  62% { transform: translateX(0); animation-timing-function: cubic-bezier(.62, 0, .86, .5); }
+  100% { transform: translateX(760px); }
+}
+@keyframes sc-infrastruktura-kotac {
+  0% { transform: rotate(0deg); animation-timing-function: cubic-bezier(.16, .56, .32, 1); }
+  38% { transform: rotate(4838deg); }
+  62% { transform: rotate(4838deg); animation-timing-function: cubic-bezier(.62, 0, .86, .5); }
+  100% { transform: rotate(9676deg); }
+}
+@keyframes sc-infrastruktura-prijelaz { from { transform: translateX(-760px); } to { transform: translateX(760px); } }
+@keyframes sc-infrastruktura-kotac-l { from { transform: rotate(0deg); } to { transform: rotate(9676deg); } }
+@keyframes sc-infrastruktura-valjaj { from { transform: translateX(-36px); } to { transform: translateX(36px); } }
+@keyframes sc-infrastruktura-valjak { from { transform: rotate(0deg); } to { transform: rotate(121.3deg); } }
+@keyframes sc-infrastruktura-kotacv { from { transform: rotate(0deg); } to { transform: rotate(171.9deg); } }
+
+
+/* ---- tema-inovacije.css ---- */
+/* Tema "inovacije" i scena "zadano": vlastite animacije (prefiks sc-inovacije-, teku samo pod .scena.play). */
+
+/* sjaj oko žarulje: meko disanje */
+.scena.play .sc-inovacije-sjaj { animation: sc-inovacije-sjaj 3.6s ease-in-out infinite; }
+@keyframes sc-inovacije-sjaj { 0%, 100% { transform: scale(.9); opacity: .55; } 50% { transform: scale(1.06); opacity: 1; } }
+
+/* zrake žarulje: titraju u ritmu sjaja */
+.scena.play .sc-inovacije-zraka { animation: sc-inovacije-zraka 3.6s ease-in-out infinite; }
+@keyframes sc-inovacije-zraka { 0%, 100% { opacity: .3; } 50% { opacity: 1; } }
+
+/* elise drona: lagano "okretanje" (sužavanje i širenje) */
+.scena.play .sc-inovacije-elisa { animation: sc-inovacije-elisa 1.2s ease-in-out infinite; }
+@keyframes sc-inovacije-elisa { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.3); } }
+
+/* glava 3D pisača klizi po vodilici */
+.scena.play .sc-inovacije-glava { animation: sc-inovacije-glava 3.4s ease-in-out infinite alternate; }
+@keyframes sc-inovacije-glava { from { transform: translateX(-13px); } to { transform: translateX(13px); } }
+
+/* zadano: reci dokumenta se ispisuju redom, olovka ih prati */
+.scena.play .sc-inovacije-pisi1 { animation: sc-inovacije-pisi1 7s linear infinite; }
+.scena.play .sc-inovacije-pisi2 { animation: sc-inovacije-pisi2 7s linear infinite; }
+.scena.play .sc-inovacije-pisi3 { animation: sc-inovacije-pisi3 7s linear infinite; }
+@keyframes sc-inovacije-pisi1 { 0% { stroke-dashoffset: 100; opacity: 1; } 22% { stroke-dashoffset: 0; } 88% { stroke-dashoffset: 0; opacity: 1; } 96% { stroke-dashoffset: 0; opacity: 0; } 97% { stroke-dashoffset: 100; opacity: 0; } 100% { stroke-dashoffset: 100; opacity: 1; } }
+@keyframes sc-inovacije-pisi2 { 0%, 27% { stroke-dashoffset: 100; opacity: 1; } 49% { stroke-dashoffset: 0; } 88% { stroke-dashoffset: 0; opacity: 1; } 96% { stroke-dashoffset: 0; opacity: 0; } 97% { stroke-dashoffset: 100; opacity: 0; } 100% { stroke-dashoffset: 100; opacity: 1; } }
+@keyframes sc-inovacije-pisi3 { 0%, 54% { stroke-dashoffset: 100; opacity: 1; } 69% { stroke-dashoffset: 0; } 88% { stroke-dashoffset: 0; opacity: 1; } 96% { stroke-dashoffset: 0; opacity: 0; } 97% { stroke-dashoffset: 100; opacity: 0; } 100% { stroke-dashoffset: 100; opacity: 1; } }
+.scena.play .sc-inovacije-olovka { animation: sc-inovacije-olovka 7s linear infinite; }
+@keyframes sc-inovacije-olovka {
+  0% { transform: translate(-58px, -38px); }
+  22% { transform: translate(6px, -38px); }
+  27% { transform: translate(-58px, -23px); }
+  49% { transform: translate(6px, -23px); }
+  54% { transform: translate(-58px, -8px); }
+  69% { transform: translate(-14px, -8px); }
+  76% { transform: translate(0, 0); }
+  90% { transform: translate(0, 0); }
+  100% { transform: translate(-58px, -38px); }
+}
+
+/* inovatorica podiže pehar nagrade: ruka se lagano njiše oko lakta */
+.scena .sc-inovacije-ruka { transform-origin: 50% 100%; }
+.scena.play .sc-inovacije-ruka { animation: sc-inovacije-ruka 3.2s ease-in-out infinite alternate; }
+@keyframes sc-inovacije-ruka { from { transform: rotate(-3deg); } to { transform: rotate(4deg); } }
+
+
+/* ---- tema-internacionalizacija.css ---- */
+/* Tema internacionalizacija: vlastite animacije (teku samo pod .scena.play). */
+.scena .sc-internacionalizacija-uze { transform-origin: 50% 0; }
+
+/* kontinenti klize unutar kugle zapad-istok (udesno, kao Zemlja): jedan puni okret je traka od 320 jedinica */
+.scena.play .sc-internacionalizacija-okret { animation: sc-internacionalizacija-okret 36s linear infinite; }
+/* lučka dizalica: kontejner se spušta na palubu i vraća, uže se rasteže u istom ritmu */
+.scena.play .sc-internacionalizacija-teret { animation: sc-internacionalizacija-teret 7s ease-in-out infinite; }
+.scena.play .sc-internacionalizacija-uze { animation: sc-internacionalizacija-uze 7s ease-in-out infinite; }
+.scena.play .sc-internacionalizacija-ljulja { animation: sc-internacionalizacija-ljulja 6s ease-in-out infinite; }
+/* kamion: oznake na cesti teku unatrag, tijelo lagano poskakuje */
+.scena.play .sc-internacionalizacija-cesta { animation: sc-internacionalizacija-cesta 1.2s linear infinite; }
+.scena.play .sc-internacionalizacija-trese { animation: sc-internacionalizacija-trese 1.6s ease-in-out infinite alternate; }
+/* sajam: meridijan globusa na zaglavlju se okreće, rukovanje */
+.scena.play .sc-internacionalizacija-meridijan { animation: sc-internacionalizacija-meridijan 4.5s ease-in-out infinite alternate; }
+.scena.play .sc-internacionalizacija-ruka { animation: sc-internacionalizacija-ruka 2.4s ease-in-out infinite alternate; }
+
+@keyframes sc-internacionalizacija-okret { from { transform: translateX(-320px); } to { transform: translateX(0); } }
+@keyframes sc-internacionalizacija-teret { 0%, 14%, 100% { transform: translateY(0); } 48%, 66% { transform: translateY(24px); } }
+@keyframes sc-internacionalizacija-uze { 0%, 14%, 100% { transform: scaleY(1); } 48%, 66% { transform: scaleY(1.632); } }
+@keyframes sc-internacionalizacija-ljulja { 0%, 100% { transform: rotate(-0.6deg); } 50% { transform: rotate(0.6deg) translateY(1.5px); } }
+@keyframes sc-internacionalizacija-cesta { from { stroke-dashoffset: 0; } to { stroke-dashoffset: 36; } }
+@keyframes sc-internacionalizacija-trese { from { transform: translateY(0); } to { transform: translateY(-1.2px); } }
+@keyframes sc-internacionalizacija-meridijan { from { transform: scaleX(1); } to { transform: scaleX(-1); } }
+@keyframes sc-internacionalizacija-ruka { from { transform: translateY(-0.8px); } to { transform: translateY(1.6px); } }
+
+
+/* ---- tema-istrazivanje.css ---- */
+/* Tema "istraživanje": vlastite animacije (prefiks sc-istrazivanje-, teku samo pod .scena.play). */
+
+/* DNK: uzorak spirale klizi za točno jednu periodu (48) pa izgleda kao da se spirala vrti */
+.scena.play .sc-istrazivanje-dna { animation: sc-istrazivanje-dna 6s linear infinite; }
+@keyframes sc-istrazivanje-dna { from { transform: translateY(0); } to { transform: translateY(-48px); } }
+.scena.play .sc-istrazivanje-dnax { animation: sc-istrazivanje-dnax 6s linear infinite; }
+@keyframes sc-istrazivanje-dnax { from { transform: translateX(0); } to { transform: translateX(-48px); } }
+
+/* mjehurići u tekućini: dižu se kratko i nestaju */
+.scena.play .sc-istrazivanje-mjehur { animation: sc-istrazivanje-mjehur 2.9s ease-in infinite; }
+@keyframes sc-istrazivanje-mjehur { 0% { transform: translateY(0); opacity: 0; } 18% { opacity: .9; } 72% { opacity: .9; } 100% { transform: translateY(-20px); opacity: 0; } }
+
+/* para iz grla tikvice u motivu: mala visina da ostane u kvadratu 100 x 100 */
+.scena.play .sc-istrazivanje-para { animation: sc-istrazivanje-para 2.6s ease-out infinite; }
+@keyframes sc-istrazivanje-para { 0% { transform: translateY(0) scale(.6); opacity: 0; } 25% { opacity: .95; } 100% { transform: translateY(-9px) scale(1.15); opacity: 0; } }
+
+/* ruka s epruvetom: lagano mućkanje oko lakta */
+.scena .sc-istrazivanje-ruka { transform-origin: 50% 100%; }
+.scena.play .sc-istrazivanje-ruka { animation: sc-istrazivanje-ruka 3.4s ease-in-out infinite alternate; }
+@keyframes sc-istrazivanje-ruka { from { transform: rotate(-4deg); } to { transform: rotate(5deg); } }
+
+/* ljubičasto svjetlo u komori za uzgoj: meko disanje */
+.scena.play .sc-istrazivanje-led { animation: sc-istrazivanje-led 4.2s ease-in-out infinite; }
+@keyframes sc-istrazivanje-led { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+
+/* satelitska antena: polagano skeniranje neba */
+.scena .sc-istrazivanje-antena { transform-origin: 50% 100%; }
+.scena.play .sc-istrazivanje-antena { animation: sc-istrazivanje-antena 7s ease-in-out infinite alternate; }
+@keyframes sc-istrazivanje-antena { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+
+/* signal antene: lukovi se pale jedan za drugim */
+.scena.play .sc-istrazivanje-signal { animation: sc-istrazivanje-signal 2.7s ease-in-out infinite; }
+@keyframes sc-istrazivanje-signal { 0%, 100% { opacity: .12; } 40% { opacity: 1; } }
+
+/* plamen rakete: mirno treperi od mlaznice prema dolje */
+.scena .sc-istrazivanje-plamen { transform-origin: 50% 0; }
+.scena.play .sc-istrazivanje-plamen { animation: sc-istrazivanje-plamen 1.3s ease-in-out infinite alternate; }
+@keyframes sc-istrazivanje-plamen { from { transform: scaleY(.82); } to { transform: scaleY(1.1); } }
+
+/* skener: svjetlosna crta polako prelazi preko predmeta pod staklenim zvonom */
+.scena.play .sc-istrazivanje-sken { animation: sc-istrazivanje-sken 3.6s ease-in-out infinite alternate; }
+@keyframes sc-istrazivanje-sken { from { transform: translateY(0); } to { transform: translateY(-62px); } }
+
+/* teleskop u zvjezdarnici na krovu: polako se naginje */
+.scena .sc-istrazivanje-dalekozor { transform-origin: 50% 100%; }
+.scena.play .sc-istrazivanje-dalekozor { animation: sc-istrazivanje-dalekozor 6.5s ease-in-out infinite alternate; }
+@keyframes sc-istrazivanje-dalekozor { from { transform: rotate(-8deg); } to { transform: rotate(6deg); } }
+
+/* plamen plamenika u digestoru: mirno treperi od dna prema gore */
+.scena .sc-istrazivanje-plamicak { transform-origin: 50% 100%; }
+.scena.play .sc-istrazivanje-plamicak { animation: sc-istrazivanje-plamicak 1.2s ease-in-out infinite alternate; }
+@keyframes sc-istrazivanje-plamicak { from { transform: scale(.86, .8); } to { transform: scale(1, 1.08); } }
+
+/* gantogram istraživačkog menadžera: traka zadatka u tijeku polako napreduje slijeva */
+.scena .sc-istrazivanje-traka { transform-origin: 0 50%; }
+.scena.play .sc-istrazivanje-traka { animation: sc-istrazivanje-traka 4.6s cubic-bezier(.2,.65,.3,1) infinite alternate; }
+@keyframes sc-istrazivanje-traka { from { transform: scaleX(.35); } to { transform: scaleX(1); } }
+
+
+/* ---- tema-krediti.css ---- */
+/* Tema "krediti": vlastite animacije scena. Sve teče samo pod .scena.play (scena na ekranu). */
+
+/* novčić u zabatu banke (i u motivu) povremeno se okrene oko okomite osi */
+.scena.play .sc-krediti-okret { animation: sc-krediti-okret 7s ease-in-out infinite; }
+@keyframes sc-krediti-okret { 0%, 76% { transform: scaleX(1); } 84% { transform: scaleX(.12); } 92%, 100% { transform: scaleX(1); } }
+
+/* novčić pada na hrpu, kratko stoji i nestane */
+.scena.play .sc-krediti-pad { animation: sc-krediti-pad 3.6s infinite; }
+@keyframes sc-krediti-pad {
+  0% { transform: translateY(-46px); opacity: 0; animation-timing-function: cubic-bezier(.5, 0, .9, .5); }
+  16% { opacity: 1; }
+  52% { transform: translateY(0); opacity: 1; }
+  74% { transform: translateY(0); opacity: 1; }
+  90%, 100% { transform: translateY(0); opacity: 0; }
+}
+
+/* motiv teme: novčić pada na hrpu s manje visine */
+.scena.play .sc-krediti-mpad { animation: sc-krediti-mpad 3.6s infinite; }
+@keyframes sc-krediti-mpad {
+  0% { transform: translateY(-24px); opacity: 0; animation-timing-function: cubic-bezier(.5, 0, .9, .5); }
+  18% { opacity: 1; }
+  50% { transform: translateY(0); opacity: 1; }
+  74% { transform: translateY(0); opacity: 1; }
+  90%, 100% { transform: translateY(0); opacity: 0; }
+}
+
+/* novčić upada u prorez kasice (dio ispod proreza skriva izrez) */
+.scena.play .sc-krediti-ubaci { animation: sc-krediti-ubaci 3.8s infinite; }
+@keyframes sc-krediti-ubaci {
+  0% { transform: translateY(-38px); opacity: 0; animation-timing-function: cubic-bezier(.45, 0, .8, .6); }
+  18% { opacity: 1; }
+  62%, 100% { transform: translateY(26px); opacity: 1; }
+}
+
+/* zastavica na zabatu istaknutog natječaja */
+.scena.play .sc-krediti-zastava { transform-origin: 0 50%; animation: sc-krediti-zastava 2.6s ease-in-out infinite alternate; }
+@keyframes sc-krediti-zastava { from { transform: skewY(-6deg); } to { transform: skewY(5deg) scaleX(.9); } }
+
+/* vreteno novog stroja spušta se i diže */
+.scena.play .sc-krediti-vreteno { animation: sc-krediti-vreteno 3s ease-in-out infinite; }
+@keyframes sc-krediti-vreteno { 0%, 20%, 100% { transform: translateY(0); } 50%, 70% { transform: translateY(6px); } }
+
+
+/* ---- tema-kultura.css ---- */
+/* Tema kultura: vlastite animacije (teku samo pod .scena.play). Sve mirno, ciklusi od 2,8 do 7 s. */
+/* zastor se lagano njiše oko gornjeg ruba */
+.scena g.sc-kultura-zastor { transform-origin: 50% 0; }
+.scena.play .sc-kultura-zastor { animation: sc-kultura-zastor 6.4s ease-in-out infinite alternate; }
+@keyframes sc-kultura-zastor { from { transform: skewX(-1.8deg); } to { transform: skewX(1.8deg); } }
+/* žarulje na gredi: dvije skupine naizmjence tinjaju */
+.scena.play .sc-kultura-zarulje { animation: sc-kultura-zarulje 3.2s ease-in-out infinite; }
+@keyframes sc-kultura-zarulje { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+/* snop reflektora polako klizi po pozornici (okretište je ishodište grupe) */
+.scena.play .sc-kultura-snop { transform-box: view-box; transform-origin: 0 0; animation: sc-kultura-snop 7s ease-in-out infinite alternate; }
+@keyframes sc-kultura-snop { from { transform: rotate(-2.4deg); } to { transform: rotate(2.4deg); } }
+/* stvari koje vise (kartonski mjesec, izložbene zastave, vriježa) njišu se oko gornjeg ruba */
+.scena g.sc-kultura-visi { transform-origin: 50% 0; }
+.scena.play .sc-kultura-visi { animation: sc-kultura-visi 5s ease-in-out infinite alternate; }
+@keyframes sc-kultura-visi { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+/* kartonski valovi klize lijevo-desno */
+.scena.play .sc-kultura-val { animation: sc-kultura-val 4.6s ease-in-out infinite alternate; }
+@keyframes sc-kultura-val { from { transform: translateX(-7px); } to { transform: translateX(7px); } }
+/* knjiga na polici se nagne i vrati */
+.scena g.sc-kultura-knjiga { transform-origin: 100% 100%; }
+.scena.play .sc-kultura-knjiga { animation: sc-kultura-knjiga 6s ease-in-out infinite; }
+@keyframes sc-kultura-knjiga { 0%, 55%, 100% { transform: rotate(0deg); } 72%, 84% { transform: rotate(7deg); } }
+/* viseća lampa se lagano njiše oko točke ovjesa (ishodište grupe) */
+.scena.play .sc-kultura-lampa { transform-box: view-box; transform-origin: 0 0; animation: sc-kultura-lampa 6s ease-in-out infinite alternate; }
+@keyframes sc-kultura-lampa { from { transform: rotate(-2deg); } to { transform: rotate(2deg); } }
+/* svjetlo lampe i reflektora tiho diše */
+.scena.play .sc-kultura-sjaj { animation: sc-kultura-sjaj 4.4s ease-in-out infinite; }
+@keyframes sc-kultura-sjaj { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
+/* para iz šalice */
+.scena.play .sc-kultura-para { animation: sc-kultura-para 3s ease-out infinite; }
+@keyframes sc-kultura-para { 0% { transform: translateY(2px); opacity: 0; } 35% { opacity: 1; } 100% { transform: translateY(-9px); opacity: 0; } }
+/* note se dižu s pozornice i nestaju */
+.scena.play .sc-kultura-nota { animation: sc-kultura-nota 6.4s ease-out infinite; }
+@keyframes sc-kultura-nota { 0% { transform: translate(0, 6px) rotate(-6deg); opacity: 0; } 20% { opacity: 1; } 75% { opacity: 1; } 100% { transform: translate(6px, -34px) rotate(6deg); opacity: 0; } }
+/* zastavica na vrhu školjke vijori */
+.scena g.sc-kultura-vijori { transform-origin: 0 50%; }
+.scena.play .sc-kultura-vijori { animation: sc-kultura-vijori 2.8s ease-in-out infinite; }
+@keyframes sc-kultura-vijori { 0%, 100% { transform: skewY(0deg) scaleX(1); } 50% { transform: skewY(7deg) scaleX(.88); } }
+/* zastavice na užetu se njišu */
+.scena g.sc-kultura-zastavica { transform-origin: 50% 0; }
+.scena.play .sc-kultura-zastavica { animation: sc-kultura-zastavica 3.4s ease-in-out infinite alternate; }
+@keyframes sc-kultura-zastavica { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+/* mali krak mobila se njiše oko svoje točke ovjesa (ishodište grupe) */
+.scena.play .sc-kultura-mobil { transform-box: view-box; transform-origin: 0 0; animation: sc-kultura-mobil 5.2s ease-in-out infinite alternate; }
+@keyframes sc-kultura-mobil { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+/* stranica knjige na stalku se okrene (hrbat je lijevi rub stranice); povratak je nevidljiv jer su stranice jednake */
+.scena g.sc-kultura-stranica { transform-origin: 0 50%; }
+.scena.play .sc-kultura-stranica { animation: sc-kultura-stranica 7s ease-in-out infinite alternate; }
+@keyframes sc-kultura-stranica { 0%, 46% { transform: scaleX(1); } 62%, 100% { transform: scaleX(-1); } }
+/* klapa se otvori i zatvori (šarka je ishodište grupe) */
+.scena.play .sc-kultura-klapa { transform-box: view-box; transform-origin: 0 0; animation: sc-kultura-klapa 4.8s ease-in-out infinite; }
+@keyframes sc-kultura-klapa { 0%, 50%, 100% { transform: rotate(0deg); } 66%, 82% { transform: rotate(-22deg); } }
+
+
+/* ---- tema-obrazovanje.css ---- */
+/* Tema obrazovanje: vlastite animacije scena i motiva. Samo pod .scena.play (scena na ekranu); prefiks sc-obrazovanje-.
+   Kod okretanja je točka okretanja lokalno ishodište elementa (transform-box: view-box; transform-origin: 0 0), a položaj daje vanjska grupa.
+   Sve je mirno: najbrži pokret traje najmanje 1 s u jednom smjeru. */
+
+/* škola: kazaljke sata (minutna 20 s, satna 240 s), zvono u zvoniku, zastavica na tornju, dijete maše, lopta odskakuje */
+.scena.play .sc-obrazovanje-min { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-krug 20s linear infinite; }
+.scena.play .sc-obrazovanje-sat { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-krug 240s linear infinite; }
+.scena.play .sc-obrazovanje-zvono { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-zvono 3s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-zastavica { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-zastavica 2.6s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-mah { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-mah 1.3s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-lopta { animation: sc-obrazovanje-lopta 2.2s infinite; }
+@keyframes sc-obrazovanje-krug { to { transform: rotate(360deg); } }
+@keyframes sc-obrazovanje-zvono { from { transform: rotate(-14deg); } to { transform: rotate(14deg); } }
+@keyframes sc-obrazovanje-zastavica { from { transform: rotate(-7deg); } to { transform: rotate(5deg); } }
+@keyframes sc-obrazovanje-mah { from { transform: rotate(-16deg); } to { transform: rotate(18deg); } }
+@keyframes sc-obrazovanje-lopta {
+  0%, 100% { transform: translateY(0); animation-timing-function: cubic-bezier(.25, .6, .5, 1); }
+  50% { transform: translateY(-17px); animation-timing-function: cubic-bezier(.5, 0, .75, .4); }
+}
+
+/* školski autobus: stoji, krene i prođe iza škole, nakon stanke opet dolazi i usporava do stanice (ciklus 24 s);
+   kotači (polumjer 11) se okreću točno koliko autobus prijeđe: 760 / 11 rad = 3958,6° i 700 / 11 rad = 3646,1° */
+.scena.play .sc-obrazovanje-bus { animation: sc-obrazovanje-bus 24s linear infinite; }
+.scena.play .sc-obrazovanje-kotac { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-kotac 24s linear infinite; }
+@keyframes sc-obrazovanje-bus {
+  0%, 34% { transform: translateX(0); animation-timing-function: cubic-bezier(.55, 0, .9, .55); }
+  54% { transform: translateX(760px); animation-timing-function: steps(1, end); }
+  54.2%, 62% { transform: translateX(-700px); animation-timing-function: cubic-bezier(.12, .6, .3, 1); }
+  84%, 100% { transform: translateX(0); }
+}
+@keyframes sc-obrazovanje-kotac {
+  0%, 34% { transform: rotate(0deg); animation-timing-function: cubic-bezier(.55, 0, .9, .55); }
+  54% { transform: rotate(3958.6deg); animation-timing-function: steps(1, end); }
+  54.2%, 62% { transform: rotate(-3646.1deg); animation-timing-function: cubic-bezier(.12, .6, .3, 1); }
+  84%, 100% { transform: rotate(0deg); }
+}
+
+/* vrtić: ljuljačka s djetetom (njihalo oko grede) i prazna ljuljačka, klackalica, zmaj na uzici (njiše se oko ruke djeteta) */
+.scena.play .sc-obrazovanje-ljulja { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-ljulja 2.8s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-ljulja2 { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-ljulja2 3.6s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-klackalica { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-klackalica 3.4s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-zmaj { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-zmaj 4.6s ease-in-out infinite alternate; }
+@keyframes sc-obrazovanje-ljulja { from { transform: rotate(-17deg); } to { transform: rotate(17deg); } }
+@keyframes sc-obrazovanje-ljulja2 { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+@keyframes sc-obrazovanje-klackalica { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
+@keyframes sc-obrazovanje-zmaj { from { transform: rotate(-3deg); } to { transform: rotate(4deg); } }
+
+/* fakultet: bačene kape lebde i okreću se, teleskop zvjezdarnice polako mijenja nagib */
+.scena.play .sc-obrazovanje-leti { animation: sc-obrazovanje-leti 3.4s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-teleskop { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-teleskop 6s ease-in-out infinite alternate; }
+@keyframes sc-obrazovanje-leti { from { transform: translateY(4px) rotate(-10deg); } to { transform: translateY(-8px) rotate(10deg); } }
+@keyframes sc-obrazovanje-teleskop { from { transform: rotate(-7deg); } to { transform: rotate(6deg); } }
+
+/* radionica i učionica: svjetiljka se njiše oko stropa, mentor ili predavač pokazuje, učenik turpija ili zabija čavao, polaznik se javlja */
+.scena.play .sc-obrazovanje-njihaj { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-njihaj 4.2s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-pokazi { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-pokazi 3.4s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-turpija { animation: sc-obrazovanje-turpija 1.6s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-cekic { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-cekic 1.2s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-javlja { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-javlja 1.6s ease-in-out infinite alternate; }
+@keyframes sc-obrazovanje-njihaj { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+@keyframes sc-obrazovanje-pokazi { from { transform: rotate(-4deg); } to { transform: rotate(5deg); } }
+@keyframes sc-obrazovanje-turpija { from { transform: translateX(-2.5px); } to { transform: translateX(2.5px); } }
+@keyframes sc-obrazovanje-cekic { from { transform: rotate(-22deg); } to { transform: rotate(6deg); } }
+@keyframes sc-obrazovanje-javlja { from { transform: rotate(-12deg); } to { transform: rotate(8deg); } }
+
+/* motiv: akademska kapa se lagano naginje na knjigama, kićanka se njiše */
+.scena.play .sc-obrazovanje-kapa { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-kapa 3.8s ease-in-out infinite alternate; }
+.scena.play .sc-obrazovanje-resa { transform-box: view-box; transform-origin: 0 0; animation: sc-obrazovanje-resa 2.4s ease-in-out infinite alternate; }
+@keyframes sc-obrazovanje-kapa { from { transform: rotate(-2.5deg); } to { transform: rotate(2.5deg); } }
+@keyframes sc-obrazovanje-resa { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
+
+
+/* ---- tema-okolis.css ---- */
+/* Tema okoliš: vlastite animacije (teku samo pod .scena.play, kao i animacije jezgre). */
+
+/* krila leptira: lagano mahanje */
+.scena.play .sc-okolis-krila { animation: sc-okolis-krila 1.5s ease-in-out infinite; }
+@keyframes sc-okolis-krila { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.35); } }
+
+/* list koji pada s krošnje: njiše se lijevo-desno, okreće i nestaje */
+.scena.play .sc-okolis-pad { animation: sc-okolis-pad 8s ease-in-out infinite; }
+@keyframes sc-okolis-pad {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  35% { transform: translate(12px, 30px) rotate(60deg); }
+  65% { transform: translate(-8px, 62px) rotate(130deg); opacity: 1; }
+  90% { transform: translate(6px, 88px) rotate(190deg); opacity: 0; }
+  100% { transform: translate(6px, 88px) rotate(190deg); opacity: 0; }
+}
+
+/* plovak: mali pomak gore-dolje na valovima */
+.scena.play .sc-okolis-plovak { animation: sc-okolis-plovak 3.2s ease-in-out infinite alternate; }
+@keyframes sc-okolis-plovak { from { transform: translateY(-1.5px); } to { transform: translateY(2px); } }
+
+/* snop svjetionika: okreće se (zrcaljenje oko svjetla) */
+.scena g.sc-okolis-snop { transform-origin: 0% 50%; }
+.scena.play .sc-okolis-snop { animation: sc-okolis-snop 7s ease-in-out infinite; }
+@keyframes sc-okolis-snop { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(-1); } }
+
+/* riba: pliva lijevo-desno i polako se okrene na kraju */
+.scena.play .sc-okolis-riba { animation: sc-okolis-riba 16s ease-in-out infinite; }
+@keyframes sc-okolis-riba {
+  0% { transform: translateX(-22px) scaleX(1); }
+  44% { transform: translateX(22px) scaleX(1); }
+  50% { transform: translateX(22px) scaleX(-1); }
+  94% { transform: translateX(-22px) scaleX(-1); }
+  100% { transform: translateX(-22px) scaleX(1); }
+}
+
+/* galeb: mahanje krilima */
+.scena.play .sc-okolis-mah { animation: sc-okolis-mah 1.8s ease-in-out infinite alternate; }
+@keyframes sc-okolis-mah { from { transform: scaleY(1); } to { transform: scaleY(.55); } }
+
+/* traka sortirnice: ambalaža putuje prema hali i nestaje u otvoru */
+.scena.play .sc-okolis-traka { animation: sc-okolis-traka 6s linear infinite; }
+@keyframes sc-okolis-traka { 0% { transform: translateX(-14px); opacity: 0; } 14% { opacity: 1; } 78% { opacity: 1; } 100% { transform: translateX(34px); opacity: 0; } }
+
+
+/* ---- tema-poljoprivreda.css ---- */
+/* Tema poljoprivreda: vlastite animacije. Teku samo pod .scena.play (scena na ekranu). */
+
+/* riba povremeno iskoči iz vode (luk iznad vode); dok scena miruje, riba je ispod vode */
+.scena .sc-poljoprivreda-skok { transform-box: fill-box; transform-origin: center; opacity: 0; }
+.scena.play .sc-poljoprivreda-skok { animation: sc-poljoprivreda-skok 6.4s linear infinite; }
+@keyframes sc-poljoprivreda-skok {
+  0%, 58% { transform: translate(0, 8px) rotate(-60deg); opacity: 0; }
+  62% { transform: translate(5px, -6px) rotate(-54deg); opacity: 1; }
+  68% { transform: translate(14px, -25px) rotate(-34deg); }
+  75% { transform: translate(25px, -33px) rotate(0deg); }
+  82% { transform: translate(36px, -25px) rotate(34deg); }
+  88% { transform: translate(45px, -6px) rotate(54deg); opacity: 1; }
+  92%, 100% { transform: translate(50px, 8px) rotate(60deg); opacity: 0; }
+}
+
+/* radar na kormilarnici ribarskog broda: šipka se okreće (gledano sa strane, sužava se i širi) */
+.scena.play .sc-poljoprivreda-radar { animation: sc-poljoprivreda-radar 3.2s ease-in-out infinite; }
+@keyframes sc-poljoprivreda-radar { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.18); } }
+
+/* majstor na ljestvama: ruka s čekićem kuca oko ramena (obnova staje) */
+.scena .sc-poljoprivreda-cekic { transform-origin: 0 100%; }
+.scena.play .sc-poljoprivreda-cekic { animation: sc-poljoprivreda-cekic 1.6s ease-in-out infinite; }
+@keyframes sc-poljoprivreda-cekic { 0%, 100% { transform: rotate(-26deg); } 45%, 55% { transform: rotate(10deg); } }
+
+
+/* ---- tema-proizvodnja.css ---- */
+/* Tema "proizvodnja": vlastite animacije scena. Sve teče samo pod .scena.play (scena na ekranu). */
+
+/* zglobovi robotske ruke i viseći dijelovi okreću se oko ishodišta svoje grupe (zglob), ne oko sredine */
+.scena svg .sc-proizvodnja-rame,
+.scena svg .sc-proizvodnja-lakat,
+.scena svg .sc-proizvodnja-visi { transform-box: view-box; transform-origin: 0 0; }
+
+.scena.play .sc-proizvodnja-rame { animation: sc-proizvodnja-rame 7s ease-in-out infinite alternate; }
+.scena.play .sc-proizvodnja-lakat { animation: sc-proizvodnja-lakat 5s ease-in-out infinite alternate; }
+.scena.play .sc-proizvodnja-visi { animation: sc-proizvodnja-visi 4.6s ease-in-out infinite alternate; }
+@keyframes sc-proizvodnja-rame { from { transform: rotate(-4deg); } to { transform: rotate(3deg); } }
+@keyframes sc-proizvodnja-lakat { from { transform: rotate(6deg); } to { transform: rotate(-7deg); } }
+@keyframes sc-proizvodnja-visi { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+
+/* blagi bijeli dim: tri jednaka oblačića koja se dižu iz dimnjaka, rastu i nestaju; u mirovanju stoje kao stup dima */
+.scena.play .sc-proizvodnja-dim0 { animation: sc-proizvodnja-dim0 6s cubic-bezier(.33,.4,.5,1) infinite; }
+.scena.play .sc-proizvodnja-dim1 { animation: sc-proizvodnja-dim1 6s cubic-bezier(.33,.4,.5,1) infinite; animation-delay: -2s; }
+.scena.play .sc-proizvodnja-dim2 { animation: sc-proizvodnja-dim2 6s cubic-bezier(.33,.4,.5,1) infinite; animation-delay: -4s; }
+@keyframes sc-proizvodnja-dim0 { 0% { transform: translate(0, 0) scale(.55); opacity: 0; } 14% { opacity: 1; } 100% { transform: translate(12px, -40px) scale(1.2); opacity: 0; } }
+@keyframes sc-proizvodnja-dim1 { 0% { transform: translate(-5px, 15px) scale(.55); opacity: 0; } 14% { opacity: 1; } 100% { transform: translate(7px, -25px) scale(1.2); opacity: 0; } }
+@keyframes sc-proizvodnja-dim2 { 0% { transform: translate(-10px, 30px) scale(.55); opacity: 0; } 14% { opacity: 1; } 100% { transform: translate(2px, -10px) scale(1.2); opacity: 0; } }
+
+/* punilica u prehrambenom pogonu: glava se spušta i diže */
+.scena.play .sc-proizvodnja-puni { animation: sc-proizvodnja-puni 3.4s ease-in-out infinite; }
+@keyframes sc-proizvodnja-puni { 0%, 30%, 100% { transform: translateY(0); } 55%, 70% { transform: translateY(7px); } }
+
+/* zastavica istaknutog natječaja na krovu */
+.scena.play .sc-proizvodnja-zastava { transform-origin: 0 50%; animation: sc-proizvodnja-zastava 2.6s ease-in-out infinite alternate; }
+@keyframes sc-proizvodnja-zastava { from { transform: skewY(-6deg); } to { transform: skewY(5deg) scaleX(.9); } }
+
+/* motiv (100 x 100): dva oblačića dima iz malog dimnjaka */
+.scena.play .sc-proizvodnja-mdim0 { animation: sc-proizvodnja-mdim0 5s cubic-bezier(.33,.4,.5,1) infinite; }
+.scena.play .sc-proizvodnja-mdim1 { animation: sc-proizvodnja-mdim1 5s cubic-bezier(.33,.4,.5,1) infinite; animation-delay: -2.5s; }
+@keyframes sc-proizvodnja-mdim0 { 0% { transform: translate(0, 0) scale(.5); opacity: 0; } 16% { opacity: 1; } 100% { transform: translate(6px, -16px) scale(1.15); opacity: 0; } }
+@keyframes sc-proizvodnja-mdim1 { 0% { transform: translate(-4px, 9px) scale(.5); opacity: 0; } 16% { opacity: 1; } 100% { transform: translate(2px, -7px) scale(1.15); opacity: 0; } }
+
+
+/* ---- tema-turizam.css ---- */
+/* Tema turizam: vlastite animacije (teku samo pod .scena.play). */
+.scena .sc-turizam-ljulja { transform-origin: 50% 92%; }
+.scena .sc-turizam-vijori { transform-origin: 0 50%; }
+
+.scena.play .sc-turizam-ljulja { animation: sc-turizam-ljulja 5.2s ease-in-out infinite; }
+.scena.play .sc-turizam-vijori { animation: sc-turizam-vijori 2.6s ease-in-out infinite; }
+.scena.play .sc-turizam-let { animation: sc-turizam-let 15s ease-in-out infinite; }
+.scena.play .sc-turizam-plovi { animation: sc-turizam-plovi 16s ease-in-out infinite; }
+/* kajakaš: dvostruko veslo se njiše oko ruku */
+.scena.play .sc-turizam-veslo { animation: sc-turizam-veslo 2.4s ease-in-out infinite; }
+
+@keyframes sc-turizam-ljulja { 0%, 100% { transform: rotate(-1.8deg); } 50% { transform: rotate(1.8deg) translateY(1.5px); } }
+@keyframes sc-turizam-vijori { 0%, 100% { transform: skewY(0deg) scaleX(1); } 50% { transform: skewY(7deg) scaleX(.9); } }
+@keyframes sc-turizam-let { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(16px, -6px); } }
+@keyframes sc-turizam-plovi { 0%, 100% { transform: translateX(-12px); } 50% { transform: translateX(12px); } }
+@keyframes sc-turizam-veslo { 0%, 100% { transform: rotate(-16deg); } 50% { transform: rotate(16deg); } }
+
+
+/* ---- tema-zaposljavanje.css ---- */
+/* Tema "zapošljavanje": vlastite animacije scena (prefiks sc-zaposljavanje-). Sve teče samo pod .scena.play (scena na ekranu). */
+
+/* zglobovi (kuk, rame, kazaljka, zastavica, lampa) okreću se oko ishodišta svoje grupe, ne oko sredine */
+.scena svg .sc-zaposljavanje-noga1,
+.scena svg .sc-zaposljavanje-noga2,
+.scena svg .sc-zaposljavanje-ruka,
+.scena svg .sc-zaposljavanje-kaz,
+.scena svg .sc-zaposljavanje-kaz-z,
+.scena svg .sc-zaposljavanje-zast,
+.scena svg .sc-zaposljavanje-visi { transform-box: view-box; transform-origin: 0 0; }
+
+/* novi zaposlenik: dolazi do vrata, uđe (nestane) i ponovno stiže; noge i ruka s torbom u ritmu koraka */
+.scena.play .sc-zaposljavanje-hod { animation: sc-zaposljavanje-hod 9s linear infinite; }
+.scena.play .sc-zaposljavanje-noga1 { animation: sc-zaposljavanje-korak .72s ease-in-out infinite alternate; }
+.scena.play .sc-zaposljavanje-noga2 { animation: sc-zaposljavanje-korak .72s ease-in-out infinite alternate-reverse; }
+.scena.play .sc-zaposljavanje-ruka { animation: sc-zaposljavanje-mah .72s ease-in-out infinite alternate-reverse; }
+@keyframes sc-zaposljavanje-hod {
+  0% { transform: translateX(-96px); opacity: 0; }
+  6% { opacity: 1; }
+  80% { transform: translateX(0); opacity: 1; }
+  88%, 100% { transform: translateX(6px); opacity: 0; }
+}
+@keyframes sc-zaposljavanje-korak { from { transform: rotate(-8deg); } to { transform: rotate(8deg); } }
+@keyframes sc-zaposljavanje-mah { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+
+/* zastavice dobrodošlice: blago njihanje oko točke vješanja */
+.scena.play .sc-zaposljavanje-zast { animation: sc-zaposljavanje-zast 2.6s ease-in-out infinite alternate; }
+@keyframes sc-zaposljavanje-zast { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+
+/* zidni sat: minutna kazaljka (u zrcaljenoj sceni obrnuto, da i dalje ide u smjeru kazaljke) */
+.scena.play .sc-zaposljavanje-kaz { animation: sc-zaposljavanje-krug 12s linear infinite; }
+.scena.play .sc-zaposljavanje-kaz-z { animation: sc-zaposljavanje-krug 12s linear infinite reverse; }
+@keyframes sc-zaposljavanje-krug { to { transform: rotate(360deg); } }
+
+/* viseća lampa u radionici */
+.scena.play .sc-zaposljavanje-visi { animation: sc-zaposljavanje-visi 4.8s ease-in-out infinite alternate; }
+@keyframes sc-zaposljavanje-visi { from { transform: rotate(-3deg); } to { transform: rotate(3deg); } }
+
+/* motiv: novi član tima lagano izroni iza stola */
+.scena.play .sc-zaposljavanje-izroni { animation: sc-zaposljavanje-izroni 3.8s ease-in-out infinite; }
+@keyframes sc-zaposljavanje-izroni { 0%, 100% { transform: translateY(3px); } 45%, 70% { transform: translateY(-3px); } }
+

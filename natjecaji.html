@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aktualni natječaji | EdenPlan</title>
+  <meta name="description" content="Otvoreni i najavljeni natječaji za bespovratna sredstva i povoljne kredite u Hrvatskoj i programima EU: za firme, gradove, općine i ustanove. Rokovi, iznosi, tko se može prijaviti.">
+  <link rel="canonical" href="https://edenplan.hr/natjecaji.html">
+  <meta property="og:title" content="Aktualni natječaji, EdenPlan">
+  <meta property="og:description" content="Što je otvoreno sada i što dolazi: natječaji u Hrvatskoj i programima EU, s rokovima i iznosima.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://edenplan.hr/natjecaji.html">
+  <meta property="og:image" content="https://edenplan.hr/og-slika.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="scene.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="ikone.js"></script>
+  <script src="scene.js"></script>
+  <script src="zajednicko.js"></script>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span class="mark">E</span>EdenPlan</a>
+    <button class="burger" aria-label="Izbornik" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+    <ul class="menu" id="menu">
+      <li><a href="index.html#usluge">Usluge</a></li>
+      <li><a href="natjecaji.html">Natječaji</a></li>
+      <li><a href="index.html#kako">Kako radimo</a></li>
+      <li><a href="index.html#pitanja">Pitanja</a></li>
+      <li><a class="pill" href="index.html#kontakt">Javite se</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="grey" style="padding-top:64px">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Aktualni natječaji.</h2>
+      <p>Otvoreno sada i najavljeno do proljeća 2027. u Hrvatskoj i programima EU. Kliknite natječaj za detalje: tko se može prijaviti, koliko, do kada i što se financira.</p>
+    </div>
+    <div class="filters" id="f-koga">
+      <button data-v="" class="on">Svi</button>
+      <button data-v="firme">Firme</button>
+      <button data-v="javna tijela">Gradovi i općine</button>
+      <button data-v="ustanove">Ustanove</button>
+      <button data-v="poljoprivreda">Poljoprivreda</button>
+    </div>
+    <div class="filters" id="f-zemlja">
+      <button data-v="" class="on">Sve</button>
+      <button data-v="Hrvatska">Nacionalni pozivi</button>
+      <button data-v="EU">Programi EU</button>
+    </div>
+    <div class="filters" id="f-status">
+      <button data-v="" class="on">Otvoreno i najave</button>
+      <button data-v="otvoren">Samo otvoreno</button>
+      <button data-v="najavljen">Samo najave</button>
+    </div>
+    <div class="filters trazi">
+      <select id="tema" aria-label="Tema"><option value="">Sve teme</option></select>
+      <input type="search" id="q" placeholder="Pretraži po nazivu, tijelu, temi">
+    </div>
+    <div class="brojac" id="brojac"></div>
+    <div class="nk-mreza" id="lista"></div>
+    <div class="center" style="margin-top:28px"><button class="btn" id="jos" style="display:none">Prikaži još</button></div>
+    <p class="cnote" id="cnote"></p>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap">
+    <div class="cta reveal zoom">
+      <h2>Ne znate koji vam natječaj odgovara?</h2>
+      <p>Pošaljite nekoliko rečenica o firmi ili ustanovi i o tome što planirate. U dva radna dana kažemo može li se i kako dalje.</p>
+      <div class="row">
+        <a class="btn light" href="mailto:info@edenplan.hr">info@edenplan.hr</a>
+        <a class="btn" href="tel:+385992954600">+385 99 295 4600</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div>Copyright 2026 EdenPlan j.d.o.o., Samobor. Sva prava pridržana.</div>
+    <div><a href="impressum.html">Impressum</a><a href="privatnost.html">Privatnost</a></div>
+  </div>
+</footer>
+
+<script>
+  // Mreža natječaja iz pozivi.json s filtrima; pozivi s prošlim rokom se ne prikazuju; scene se animiraju samo dok su na ekranu.
+  (function () {
+    var svi = [], koga = '', zemlja = '', q = '', status = '', tema = '', KORAK = 12, granica = KORAK;
+    var lista = document.getElementById('lista'), brojac = document.getElementById('brojac'), note = document.getElementById('cnote'), jos = document.getElementById('jos'), sel = document.getElementById('tema');
+    // filtri iz adrese (npr. natjecaji.html?tema=energija&koga=firme) da se mogu dijeliti
+    var u = new URLSearchParams(location.search);
+    tema = u.get('tema') || ''; koga = u.get('koga') || ''; zemlja = u.get('zemlja') || ''; status = u.get('status') || ''; q = (u.get('q') || '').toLowerCase();
+    function oznaci(id, v) { var box = document.getElementById(id); Array.prototype.forEach.call(box.children, function (b) { b.classList.toggle('on', b.getAttribute('data-v') === v); }); }
+    oznaci('f-koga', koga); oznaci('f-zemlja', zemlja); oznaci('f-status', status); document.getElementById('q').value = q;
+    function zapamti() { var p = new URLSearchParams(); if (tema) p.set('tema', tema); if (koga) p.set('koga', koga); if (zemlja) p.set('zemlja', zemlja); if (status) p.set('status', status); if (q) p.set('q', q); var s = p.toString(); history.replaceState(null, '', s ? '?' + s : location.pathname); }
+    function prikazi() {
+      var f = svi.filter(function (p) {
+        if (zemlja && p.zemlja !== zemlja) return false;
+        if (koga && !(p.za_koga || []).some(function (k) { return k === koga; })) return false;
+        if (status === 'najavljen' && p.status !== 'najavljen') return false;
+        if (status === 'otvoren' && p.status === 'najavljen') return false;
+        if (tema && !(p.tema || []).some(function (t) { return t === tema; })) return false;
+        if (q) { var s = (p.naziv + ' ' + p.tijelo + ' ' + (p.program || '') + ' ' + (p.tema || []).join(' ') + ' ' + (p.za || '') + ' ' + (p.sto_financira || '')).toLowerCase(); if (s.indexOf(q) < 0) return false; }
+        return true;
+      });
+      lista.innerHTML = '';
+      if (!f.length) { lista.innerHTML = '<div class="prazno" style="grid-column:1/-1">Nema natječaja za odabrani filtar. Javite se, pratimo najave.</div>'; brojac.textContent = ''; jos.style.display = 'none'; return; }
+      var n = f.length, rijec = (n % 10 === 1 && n % 100 !== 11) ? ' natječaj' : ' natječaja';
+      brojac.textContent = n + rijec + ', prvo istaknuti, zatim po roku';
+      lista.innerHTML = f.slice(0, granica).map(NAT.kartica).join('');
+      if (window.SCENE) SCENE.aktiviraj(lista);
+      jos.style.display = n > granica ? 'inline-block' : 'none';
+      jos.textContent = 'Prikaži još (' + Math.max(0, n - granica) + ')';
+    }
+    function uredi(data) {
+      svi = data.pozivi.filter(NAT.aktivan).sort(NAT.poredaj);
+      var teme = {}; svi.forEach(function (p) { (p.tema || []).forEach(function (t) { teme[t] = (teme[t] || 0) + 1; }); });
+      Object.keys(teme).sort().forEach(function (t) { var o = document.createElement('option'); o.value = t; o.textContent = t.charAt(0).toUpperCase() + t.slice(1) + ' (' + teme[t] + ')'; if (t === tema) o.selected = true; sel.appendChild(o); });
+      note.textContent = 'Stanje ' + data.stanje + ' Rokovi i uvjeti provjereni na službenim stranicama; prije prijave ih ponovno provjeravamo u izvornoj dokumentaciji. Datumi uz najave su iz planova objave i nisu rokovi.';
+      prikazi();
+    }
+    NAT.ucitaj().then(uredi).catch(function () { lista.innerHTML = '<div class="prazno" style="grid-column:1/-1">Popis se trenutno ne može učitati. Javite se, poslat ćemo ga e-mailom.</div>'; });
+    sel.addEventListener('change', function (e) { tema = e.target.value; granica = KORAK; zapamti(); prikazi(); });
+    jos.addEventListener('click', function () { granica += KORAK; prikazi(); });
+    ['f-koga', 'f-zemlja', 'f-status'].forEach(function (id) {
+      var box = document.getElementById(id);
+      box.addEventListener('click', function (e) {
+        var b = e.target.closest('button'); if (!b) return;
+        Array.prototype.forEach.call(box.children, function (x) { x.classList.remove('on'); }); b.classList.add('on');
+        var v = b.getAttribute('data-v');
+        if (id === 'f-koga') koga = v; else if (id === 'f-zemlja') zemlja = v; else status = v;
+        granica = KORAK; zapamti(); prikazi();
+      });
+    });
+    var tq; document.getElementById('q').addEventListener('input', function (e) { clearTimeout(tq); var v = e.target.value.trim().toLowerCase(); tq = setTimeout(function () { q = v; granica = KORAK; zapamti(); prikazi(); }, 180); });
+    var els = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) { var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }); }, { threshold: .05 }); els.forEach(function (e) { io.observe(e); }); }
+    else { els.forEach(function (e) { e.classList.add('in'); }); }
+  })();
+</script>
+</body>
+</html>

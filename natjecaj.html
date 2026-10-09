@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Natječaj | EdenPlan</title>
+  <meta name="description" content="Detalji natječaja: tko se može prijaviti, koliko, do kada i što se financira. EdenPlan, savjetovanje za EU i nacionalne potpore.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://edenplan.hr/og-slika.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="scene.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="ikone.js"></script>
+  <script src="scene.js"></script>
+  <script src="zajednicko.js"></script>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html"><span class="mark">E</span>EdenPlan</a>
+    <button class="burger" aria-label="Izbornik" onclick="document.getElementById('menu').classList.toggle('open')">☰</button>
+    <ul class="menu" id="menu">
+      <li><a href="index.html#usluge">Usluge</a></li>
+      <li><a href="natjecaji.html">Natječaji</a></li>
+      <li><a href="index.html#kako">Kako radimo</a></li>
+      <li><a href="index.html#pitanja">Pitanja</a></li>
+      <li><a class="pill" href="index.html#kontakt">Javite se</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="glavno">
+  <div class="wrap np-nema" id="ucitavanje"><p class="sub">Učitavam natječaj…</p></div>
+</main>
+
+<footer>
+  <div class="wrap row">
+    <div>Copyright 2026 EdenPlan j.d.o.o., Samobor. Sva prava pridržana.</div>
+    <div><a href="impressum.html">Impressum</a><a href="privatnost.html">Privatnost</a></div>
+  </div>
+</footer>
+
+<script>
+  // Stranica jednog natječaja: natjecaj.html?id=<id> (id iz pozivi.json). Scena, odbrojavanje, detalji, upit, srodni natječaji.
+  (function () {
+    var glavno = document.getElementById('glavno'), e = NAT.esc;
+    var id = new URLSearchParams(location.search).get('id') || '';
+    function nema() {
+      glavno.innerHTML = '<div class="wrap np-nema"><h1 style="font-size:2rem">Ovog natječaja više nema na popisu.</h1><p class="sub">Rok je možda prošao ili je poveznica krivo upisana.</p><p style="margin-top:26px"><a class="btn" href="natjecaji.html">Svi aktualni natječaji</a></p></div>';
+      document.title = 'Natječaj nije pronađen | EdenPlan';
+    }
+    function odbrojavanje(p) {
+      if (p.status === 'najavljen') return '<div class="np-odbroj"><div class="v" style="font-size:2.4rem">Najava</div><div class="l">' + e(p.rok ? 'očekivani rok ' + NAT.datum(p.rok) : 'poziv još nije objavljen') + '</div></div>';
+      if (!p.rok) return '<div class="np-odbroj"><div class="v" style="font-size:2.2rem">Otvoreno</div><div class="l">do iskorištenja sredstava</div></div>';
+      var d = NAT.dana(p.rok), traka = '';
+      if (/^\d{4}-\d{2}-\d{2}$/.test(p.objavljen || '') && p.objavljen < p.rok) {
+        var ukupno = (new Date(p.rok) - new Date(p.objavljen)) / 864e5, proslo = Math.max(0, Math.min(ukupno, (NAT.danas - new Date(p.objavljen + 'T00:00:00')) / 864e5));
+        traka = '<div class="np-traka"><i data-w="' + Math.round(100 * proslo / ukupno) + '"></i></div><div class="np-traka-l"><span>objava ' + NAT.datum(p.objavljen) + '</span><span>rok ' + NAT.datum(p.rok) + '</span></div>';
+      }
+      return '<div class="np-odbroj"><div class="v"><span class="num" data-to="' + Math.max(0, d) + '">0</span><small>' + (d <= 0 ? 'rok je danas' : NAT.rijecDan(d)) + '</small></div><div class="l">do roka ' + NAT.datum(p.rok) + (p.status === 'obustavljen' ? ', zaprimanje privremeno obustavljeno' : '') + '</div>' + traka + '</div>';
+    }
+    function prikazi(data) {
+      var svi = data.pozivi.filter(NAT.aktivan), p = svi.filter(function (x) { return x.id === id; })[0];
+      if (!p) return nema();
+      var s = NAT.status(p), t = NAT.temaInfo(p);
+      var koga = (p.za_koga || []).map(function (k) { return NAT.KOGA[k] || k; }).join(', ');
+      var teme = (p.tema || []).map(function (k) { var T = window.IKONE && window.IKONE.T[k]; return T ? '<span style="--tb:' + T.b + '"><i></i>' + e(T.naziv) + '</span>' : ''; }).join('');
+      var upit = 'mailto:info@edenplan.hr?subject=' + encodeURIComponent('Upit: ' + p.naziv) + '&body=' + encodeURIComponent('Pozdrav,\n\nzanima nas natječaj "' + p.naziv + '" (' + location.href + ').\n\nUkratko o nama i o tome što planiramo:\n\n');
+      document.title = p.naziv + ' | EdenPlan';
+      var md = document.querySelector('meta[name="description"]'); if (md) md.setAttribute('content', NAT.kratko(p.naziv + '. ' + (p.iznos || '') + '. ' + (p.rok_tekst || ''), 155));
+      var can = document.createElement('link'); can.rel = 'canonical'; can.href = 'https://edenplan.hr/' + NAT.link(p); document.head.appendChild(can);
+      // srodni: ista glavna tema ili ista ciljna skupina, po roku
+      var srodni = svi.filter(function (x) { return x.id !== p.id; }).map(function (x) {
+        var b = 0; if (NAT.temaInfo(x).k === t.k) b += 3; (x.tema || []).forEach(function (k) { if ((p.tema || []).indexOf(k) >= 0) b += 1; }); (x.za_koga || []).forEach(function (k) { if ((p.za_koga || []).indexOf(k) >= 0) b += 1; }); if (x.zemlja === p.zemlja) b += 0.5; if (x.status === 'najavljen') b -= 1; return { x: x, b: b };
+      }).sort(function (a, b2) { return b2.b - a.b || NAT.poredaj(a.x, b2.x); }).slice(0, 3).map(function (z) { return z.x; });
+      glavno.innerHTML =
+        '<div class="wrap np-vrh">' +
+          '<div class="np-put"><a href="natjecaji.html">Natječaji</a> &rsaquo; ' + e(t.naziv) + '</div>' +
+          '<div class="np-scena reveal zoom">' + NAT.scena(p, 'np-hero') + '</div>' +
+          '<div class="np-glava reveal"><div class="meta"><span class="st ' + s.c + '">' + s.t + '</span><span>' + (p.zemlja === 'EU' ? 'Program EU' : 'Hrvatska') + '</span><span>' + e(p.tijelo) + '</span></div>' +
+          '<h1>' + e(p.naziv) + '</h1>' +
+          '<p class="uvod">' + e(NAT.kratko(p.sto_financira || p.iznos, 260)) + '</p></div>' +
+        '</div>' +
+        '<div class="wrap np-tijelo">' +
+          '<div>' +
+            '<div class="np-cinjenice reveal">' +
+              '<div><b>Koliko</b><span>' + e(p.iznos) + '</span></div>' +
+              '<div><b>Rok</b><span>' + e(p.rok ? NAT.datum(p.rok) : (p.status === 'najavljen' ? 'najava' : 'do iskorištenja sredstava')) + '</span></div>' +
+              '<div><b>Za koga</b><span>' + e(koga || 'vidi uvjete') + '</span></div>' +
+              '<div><b>Tijelo i program</b><span>' + e(p.tijelo + (p.program ? ', ' + p.program : '')) + '</span></div>' +
+            '</div>' +
+            (p.sto_financira ? '<div class="np-odj reveal"><h2>Što se financira</h2><p>' + e(p.sto_financira) + '</p></div>' : '') +
+            (p.za ? '<div class="np-odj reveal"><h2>Tko se može prijaviti</h2><p>' + e(p.za) + '</p></div>' : '') +
+            '<div class="np-odj reveal"><h2>Koliko se može dobiti</h2><p>' + e(p.iznos) + '</p></div>' +
+            (p.rok_tekst ? '<div class="np-odj reveal"><h2>Rok i način prijave</h2><p>' + e(p.rok_tekst) + '</p></div>' : '') +
+            (teme ? '<div class="np-odj reveal"><h2>Teme</h2><div class="np-teme">' + teme + '</div></div>' : '') +
+            '<p class="np-napomena">Podaci provjereni na službenim stranicama, stanje ' + e(data.stanje) + ' Tijela objavljuju izmjene i tumačenja, pa uvjete prije prijave ponovno provjeravamo u izvornoj dokumentaciji. Odluku o financiranju donosi isključivo nadležno tijelo.</p>' +
+          '</div>' +
+          '<aside class="np-bok reveal right">' + odbrojavanje(p) +
+            '<a class="btn" href="' + e(upit) + '">Pitajte za ovaj natječaj</a>' +
+            '<a class="btn sekundarni" href="' + e(p.link) + '" target="_blank" rel="noopener">Službena stranica</a>' +
+            '<button class="np-dijeli" type="button" id="dijeli">Podijelite poveznicu</button>' +
+            '<p class="np-napomena">Prvi razgovor i provjera prihvatljivosti su besplatni. Javljamo se u dva radna dana.</p>' +
+          '</aside>' +
+        '</div>' +
+        (srodni.length ? '<section class="grey np-srodni"><div class="wrap"><h2 class="reveal">Srodni natječaji.</h2><div class="nk-mreza">' + srodni.map(NAT.kartica).join('') + '</div><p style="margin-top:24px"><a class="link" href="natjecaji.html' + (t.k ? '?tema=' + encodeURIComponent(t.k) : '') + '">Svi natječaji iz teme ' + e(t.naziv.toLowerCase()) + '</a></p></div></section>' : '');
+      if (window.SCENE) SCENE.aktiviraj(glavno);
+      var dij = document.getElementById('dijeli');
+      dij.addEventListener('click', function () {
+        if (navigator.share) { navigator.share({ title: p.naziv, url: location.href }).catch(function () {}); return; }
+        var gotovo = function () { dij.textContent = 'Poveznica je kopirana'; setTimeout(function () { dij.textContent = 'Podijelite poveznicu'; }, 2200); };
+        if (navigator.clipboard) navigator.clipboard.writeText(location.href).then(gotovo, gotovo); else gotovo();
+      });
+      otkrij();
+    }
+    function broji(el) {
+      var to = parseInt(el.getAttribute('data-to'), 10) || 0, start = null, reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || to < 2) { el.textContent = to; return; }
+      function step(ts) { if (!start) start = ts; var q = Math.min((ts - start) / 1200, 1); el.textContent = Math.round(to * (1 - Math.pow(1 - q, 3))); if (q < 1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    }
+    function otkrij() {
+      var els = document.querySelectorAll('.reveal');
+      var pokazi = function (x) { x.classList.add('in'); x.querySelectorAll('.num').forEach(broji); x.querySelectorAll('.np-traka i').forEach(function (i) { i.style.width = i.getAttribute('data-w') + '%'; }); };
+      if (!('IntersectionObserver' in window)) { els.forEach(pokazi); return; }
+      var io = new IntersectionObserver(function (en) { en.forEach(function (x) { if (x.isIntersecting) { pokazi(x.target); io.unobserve(x.target); } }); }, { threshold: .05 });
+      els.forEach(function (x) { io.observe(x); });
+    }
+    if (!id) return nema();
+    NAT.ucitaj().then(prikazi).catch(function () { glavno.innerHTML = '<div class="wrap np-nema"><p class="sub">Natječaj se trenutno ne može učitati. Pokušajte ponovno ili nam se javite na info@edenplan.hr.</p></div>'; });
+  })();
+</script>
+</body>
+</html>
