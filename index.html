@@ -750,6 +750,20 @@
 </script>
 <script>
   // Vrtuljak aktualnih natječaja: podaci iz pozivi.json (rezerva: blok iznad); prošli rokovi se ne prikazuju; Crna Gora je na stranici natječaja. Bez vanjskih biblioteka.
+  // Dolazak sa sidrom (#usluge, #kako...): preglednik skoči na odjeljak prije nego što se učita traka natječaja.
+  // Traka ima rezervirano mjesto, a nakon umetanja kartica položaj se još jednom poravna na sidro,
+  // osim ako je posjetitelj u međuvremenu sam pomaknuo stranicu.
+  var rucnoPomaknuto = false;
+  ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) { window.addEventListener(ev, function () { rucnoPomaknuto = true; }, { passive: true, once: true }); });
+  function natragNaSidro() {
+    if (rucnoPomaknuto || !location.hash || location.hash.length < 2) return;
+    var cilj = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (!cilj) return;
+    requestAnimationFrame(function () {
+      var html = document.documentElement, staro = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto'; cilj.scrollIntoView({ block: 'start' }); html.style.scrollBehavior = staro;
+    });
+  }
   function pokreniVrtuljak(data) {
     var danas = new Date(); danas.setHours(0, 0, 0, 0);
     // na naslovnici: istaknuti pozivi (otvoreni po roku, pa najave), najviše 14; cijeli popis je na stranici natječaja
@@ -768,7 +782,7 @@
       if (!p.rok) return 'do iskorištenja';
       var d = dana(p.rok); if (d <= 0) return 'rok je danas'; var jedan = d % 10 === 1 && d % 100 !== 11; return 'još ' + d + (jedan ? ' dan' : ' dana');
     }
-    if (!aktivni.length) { track.innerHTML = '<div class="cempty">Trenutno nema otvorenih natječaja na popisu. Javite se, pratimo najave.</div>'; return; }
+    if (!aktivni.length) { track.innerHTML = '<div class="cempty">Trenutno nema otvorenih natječaja na popisu. Javite se, pratimo najave.</div>'; natragNaSidro(); return; }
     // traka kao ona s institucijama: dva ista niza kartica jedan za drugim, animacija pomiče traku za pola širine,
     // pa se kraj kruga ne vidi; staje dok je miš ili fokus na njoj, da se kartica može kliknuti
     function kartica(p, kopija) {
@@ -786,6 +800,7 @@
     }
     [false, true].forEach(function (kopija) { aktivni.forEach(function (p) { track.appendChild(kartica(p, kopija)); }); });
     if (window.SCENE) SCENE.aktiviraj(track, { skupno: true, okvir: track.parentNode });
+    natragNaSidro();
     note.textContent = 'Stanje ' + data.stanje + ' Rokovi i uvjeti provjereni u službenoj dokumentaciji; prije prijave ih ponovno provjeravamo.';
     // brzina oko 32 px u sekundi, bez obzira na broj kartica; mijenja se samo kad se promijeni širina kartica
     var zadnja = 0, odgoda;

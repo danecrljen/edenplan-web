@@ -135,11 +135,13 @@ footer .row { display: flex; justify-content: space-between; gap: 12px; flex-wra
 footer a { color: var(--ink-2); margin-left: 18px; }
 
 /* podstranice */
-.page { padding: 64px 0 96px; }
+/* samo gore i dolje: skraćeni oblik padding bi poništio bočni razmak klase .wrap (na mobitelu tekst do ruba) */
+.page { padding-top: 64px; padding-bottom: 96px; }
+.page > * { max-width: 760px; }
 .page h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); margin-bottom: 18px; }
 .page h3 { margin: 28px 0 8px; }
 .page table { border-collapse: collapse; width: 100%; max-width: 760px; margin: 16px 0 28px; }
-.page td { border-bottom: 1px solid var(--line); padding: 12px 10px; vertical-align: top; }
+.page td { border-bottom: 1px solid var(--line); padding: 12px 10px; vertical-align: top; overflow-wrap: anywhere; }
 .page td:first-child { color: var(--muted); width: 32%; }
 
 /* vrtuljak aktualnih poziva (uzor: apple.com, donji vrtuljak s pločicama) */
@@ -156,7 +158,8 @@ footer a { color: var(--ink-2); margin-left: 18px; }
 .slide .acts .btn { padding: 8px 16px; font-size: .92rem; }
 .slide .acts .link { font-size: .95rem; }
 .cnote { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 6px; padding: 0 24px; }
-.vtraka { overflow: hidden; padding: 6px 0 22px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+/* mjesto za traku rezervirano unaprijed (izmjereno 561 px, na mobitelu 506 px), da se sadržaj ispod ne pomakne kad se kartice učitaju */
+.vtraka { min-height: 550px; overflow: hidden; padding: 6px 0 22px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
 .vtraka .vt { display: flex; width: max-content; animation: slide var(--vt-t, 150s) linear infinite; }
 .vtraka:hover .vt, .vtraka:focus-within .vt { animation-play-state: paused; }
 /* razmak marginom, ne gapom: tada je pola trake točno jedan krug kartica i povratak na početak se ne vidi */
@@ -360,7 +363,7 @@ html.js .in .tik [pathLength] { stroke-dashoffset: 0; }
 .np-srodni { padding: 10px 0 80px; }
 .np-srodni h2 { font-size: 1.6rem; margin-bottom: 18px; }
 @media (min-width: 901px) { .np-srodni .nk-mreza { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-.np-nema { text-align: center; padding: 120px 0; }
+.np-nema { text-align: center; padding-top: 120px; padding-bottom: 120px; }
 
 /* otkrivanje na pomak (samo kad radi JavaScript) */
 html.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: var(--d, 0s); }
@@ -428,6 +431,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
   .stat { padding: 20px 10px; }
   .nk-mreza { grid-template-columns: 1fr; gap: 16px; }
   .vtraka .slide { width: 280px; margin-right: 14px; }
+  .vtraka { min-height: 496px; }
   .vtraka .slide h3 { font-size: 1.12rem; }
   /* filteri na mobitelu: jedan red po skupini, povlači se prstom, da se kartice vide odmah */
   .filters { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin: 0 -24px 12px; padding: 2px 24px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
