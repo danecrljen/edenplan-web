@@ -120,22 +120,16 @@
       <p>Što je otvoreno sada u Hrvatskoj i programima EU. Natječaji kojima je rok prošao sami nestaju s popisa. <a class="link" href="natjecaji.html">Svi natječaji s filtrima</a></p>
     </div>
   </div>
-  <div class="carousel reveal" aria-roledescription="vrtuljak" aria-label="Aktualni pozivi">
-    <div class="track" id="track"></div>
-    <div class="cbar">
-      <button class="cbtn" id="prev" aria-label="Prethodni">&#8249;</button>
-      <div class="dots" id="dots"></div>
-      <button class="cbtn" id="next" aria-label="Sljedeći">&#8250;</button>
-      <button class="cbtn" id="pause" aria-label="Pauziraj vrtnju">&#10074;&#10074;</button>
-    </div>
-    <p class="cnote" id="cnote"></p>
+  <div class="vtraka reveal" aria-label="Aktualni pozivi">
+    <div class="vt" id="track"></div>
   </div>
+  <p class="cnote" id="cnote"></p>
 </section>
 
 <section>
   <div class="wrap">
     <div class="stats">
-      <div class="stat reveal zoom"><div class="v"><span class="num" data-to="10">0</span><small>/10</small></div><div class="l">prijava na kojima sam radio odobreno, 100 %</div></div>
+      <div class="stat reveal zoom"><div class="v"><span class="num" data-to="10">0</span><span class="od">/10</span></div><div class="l">odobrenih prijava na kojima sam radio</div></div>
       <div class="stat reveal zoom" style="--d:.08s"><div class="v"><span class="num" id="num-pozivi" data-to="12">0</span></div><div class="l">rokova koje pratimo sada</div></div>
       <div class="stat reveal zoom" style="--d:.16s"><div class="v"><span class="num" data-to="0">0</span><small>€</small></div><div class="l">prvi razgovor i provjera prihvatljivosti</div></div>
       <div class="stat reveal zoom" style="--d:.24s"><div class="v"><span class="num" data-to="2">0</span></div><div class="l">radna dana do prvog odgovora</div></div>
@@ -766,7 +760,7 @@
     if (aktivni.length < 6) aktivni = ziv.filter(function (p) { return p.status !== 'najavljen'; }).sort(srt);
     aktivni = aktivni.slice(0, 14);
     window.__brojPoziva = data.pozivi.filter(function (p) { return !p.rok || new Date(p.rok + 'T23:59:59') >= danas; }).length;
-    var track = document.getElementById('track'), dots = document.getElementById('dots'), note = document.getElementById('cnote');
+    var track = document.getElementById('track'), note = document.getElementById('cnote');
     function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
     function dana(rok) { return Math.round((new Date(rok + 'T00:00:00') - danas) / 86400000); }
     function oznaka(p) {
@@ -775,7 +769,9 @@
       var d = dana(p.rok); if (d <= 0) return 'rok je danas'; var jedan = d % 10 === 1 && d % 100 !== 11; return 'još ' + d + (jedan ? ' dan' : ' dana');
     }
     if (!aktivni.length) { track.innerHTML = '<div class="cempty">Trenutno nema otvorenih natječaja na popisu. Javite se, pratimo najave.</div>'; return; }
-    aktivni.forEach(function (p) {
+    // traka kao ona s institucijama: dva ista niza kartica jedan za drugim, animacija pomiče traku za pola širine,
+    // pa se kraj kruga ne vidi; staje dok je miš ili fokus na njoj, da se kartica može kliknuti
+    function kartica(p, kopija) {
       var d = p.rok ? dana(p.rok) : 999, hot = (d <= 21 && p.status !== 'najavljen') ? ' hot' : '';
       var el = document.createElement('article'); el.className = 'slide slide-sc in';
       var url = 'natjecaj.html?id=' + encodeURIComponent(p.id || '');
@@ -785,26 +781,16 @@
         '<p class="fact"><b>Koliko:</b> ' + esc(window.NAT ? NAT.kratko(p.iznos, 110) : p.iznos) + '</p>' +
         '<div class="rok"><b>Rok:</b> ' + esc(p.rok ? (window.NAT ? NAT.datum(p.rok) : p.rok) : (p.status === 'najavljen' ? 'najava' : 'do iskorištenja sredstava')) + '</div>' +
         '<div class="acts"><a class="btn" href="' + url + '">Detalji</a><a class="link" href="#kontakt">Pitajte nas</a></div></div>';
-      track.appendChild(el);
-    });
-    if (window.SCENE) SCENE.aktiviraj(track);
+      if (kopija) { el.setAttribute('aria-hidden', 'true'); Array.prototype.forEach.call(el.querySelectorAll('a'), function (x) { x.setAttribute('tabindex', '-1'); }); }
+      return el;
+    }
+    [false, true].forEach(function (kopija) { aktivni.forEach(function (p) { track.appendChild(kartica(p, kopija)); }); });
+    if (window.SCENE) SCENE.aktiviraj(track, { skupno: true, okvir: track.parentNode });
     note.textContent = 'Stanje ' + data.stanje + ' Rokovi i uvjeti provjereni u službenoj dokumentaciji; prije prijave ih ponovno provjeravamo.';
-    var slides = Array.prototype.slice.call(track.children), idx = 0, timer = null, pauza = false;
-    slides.forEach(function (s, i) { var b = document.createElement('button'); b.setAttribute('aria-label', 'Poziv ' + (i + 1)); b.addEventListener('click', function () { idi(i, true); }); dots.appendChild(b); });
-    function oboji() { Array.prototype.forEach.call(dots.children, function (b, i) { b.classList.toggle('on', i === idx); }); }
-    function idi(i, rucno) { idx = (i + slides.length) % slides.length; var s = slides[idx]; track.scrollTo({ left: s.offsetLeft - (track.clientWidth - s.clientWidth) / 2, behavior: 'smooth' }); oboji(); if (rucno) restart(); }
-    var sync; track.addEventListener('scroll', function () { clearTimeout(sync); sync = setTimeout(function () { var c = track.scrollLeft + track.clientWidth / 2, best = 0, bd = 1e9; slides.forEach(function (s, i) { var d = Math.abs(s.offsetLeft + s.clientWidth / 2 - c); if (d < bd) { bd = d; best = i; } }); idx = best; oboji(); }, 80); });
-    document.getElementById('prev').addEventListener('click', function () { idi(idx - 1, true); });
-    document.getElementById('next').addEventListener('click', function () { idi(idx + 1, true); });
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function start() { if (reduce || pauza || timer) return; timer = setInterval(function () { if (!document.hidden) idi(idx + 1); }, 5500); }
-    function stop() { clearInterval(timer); timer = null; }
-    function restart() { stop(); start(); }
-    var pb = document.getElementById('pause');
-    pb.addEventListener('click', function () { pauza = !pauza; if (pauza) { stop(); pb.innerHTML = '&#9654;'; pb.setAttribute('aria-label', 'Pokreni vrtnju'); } else { start(); pb.innerHTML = '&#10074;&#10074;'; pb.setAttribute('aria-label', 'Pauziraj vrtnju'); } });
-    track.addEventListener('mouseenter', stop); track.addEventListener('mouseleave', start);
-    track.addEventListener('touchstart', stop, { passive: true }); track.addEventListener('focusin', stop); track.addEventListener('focusout', start);
-    oboji(); start();
+    // brzina oko 32 px u sekundi, bez obzira na broj kartica; mijenja se samo kad se promijeni širina kartica
+    var zadnja = 0, odgoda;
+    function brzina() { var pola = track.scrollWidth / 2; if (pola > 0 && Math.abs(pola - zadnja) > 1) { zadnja = pola; track.style.setProperty('--vt-t', Math.round(pola / 32) + 's'); } }
+    brzina(); window.addEventListener('resize', function () { clearTimeout(odgoda); odgoda = setTimeout(brzina, 300); });
   }
   (function () {
     var rezerva = JSON.parse(document.getElementById('pozivi-data').textContent);

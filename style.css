@@ -11,7 +11,7 @@
   --accent-dark: #0058b0;
   --dark: #000000;
   --dark-2: #161617;
-  --max: 1024px;
+  --max: 1400px;
   --radius: 18px;
   --ease: cubic-bezier(.2, .65, .3, 1);
 }
@@ -143,9 +143,6 @@ footer a { color: var(--ink-2); margin-left: 18px; }
 .page td:first-child { color: var(--muted); width: 32%; }
 
 /* vrtuljak aktualnih poziva (uzor: apple.com, donji vrtuljak s pločicama) */
-.carousel { position: relative; }
-.track { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; padding: 6px max(24px, calc((100vw - var(--max)) / 2 + 24px)) 18px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.track::-webkit-scrollbar { display: none; }
 .slide { flex: 0 0 auto; width: min(430px, 84vw); scroll-snap-align: center; background: #fff; border-radius: var(--radius); padding: 28px 28px 24px; display: flex; flex-direction: column; min-height: 330px; box-shadow: 0 1px 2px rgba(0,0,0,.04); transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
 .slide:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(0,0,0,.08); }
 .slide .tag { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: .82rem; color: var(--muted); margin-bottom: 14px; }
@@ -158,13 +155,17 @@ footer a { color: var(--ink-2); margin-left: 18px; }
 .slide .acts { display: flex; gap: 14px; margin-top: 14px; flex-wrap: wrap; align-items: center; }
 .slide .acts .btn { padding: 8px 16px; font-size: .92rem; }
 .slide .acts .link { font-size: .95rem; }
-.cbar { display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 8px; }
-.dots { display: flex; gap: 8px; }
-.dots button { width: 8px; height: 8px; border-radius: 50%; border: 0; padding: 0; background: rgba(0,0,0,.18); cursor: pointer; transition: background .3s, width .3s; }
-.dots button.on { background: var(--ink); width: 22px; border-radius: 4px; }
-.cbtn { width: 36px; height: 36px; border-radius: 50%; border: 0; background: rgba(0,0,0,.08); color: var(--ink); cursor: pointer; font-size: 1rem; display: inline-flex; align-items: center; justify-content: center; transition: background .25s; }
-.cbtn:hover { background: rgba(0,0,0,.16); }
-.cnote { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 18px; }
+.cnote { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 6px; padding: 0 24px; }
+.vtraka { overflow: hidden; padding: 6px 0 22px; -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent); }
+.vtraka .vt { display: flex; width: max-content; animation: slide var(--vt-t, 150s) linear infinite; }
+.vtraka:hover .vt, .vtraka:focus-within .vt { animation-play-state: paused; }
+/* razmak marginom, ne gapom: tada je pola trake točno jedan krug kartica i povratak na početak se ne vidi */
+.vtraka .slide { flex: 0 0 auto; width: 360px; margin-right: 18px; scroll-snap-align: none; }
+/* kartice u traci jednake visine: tijelo do 2 retka, naslov do 3, iznos do 3 (cijeli tekst je na stranici natječaja) */
+.vtraka .slide .tag span, .vtraka .slide h3, .vtraka .slide .fact { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+.vtraka .slide .tag span { -webkit-line-clamp: 2; line-clamp: 2; }
+.vtraka .slide h3, .vtraka .slide .fact { -webkit-line-clamp: 3; line-clamp: 3; }
+@media (prefers-reduced-motion: reduce) { .vtraka { overflow-x: auto; } .vtraka .vt { animation: none; } }
 .cempty { text-align: center; color: var(--muted); padding: 40px 0; }
 
 /* uvod u dva stupca s ilustracijom; točkasta mreža i lebdeće točke u pozadini (uzor: pjr.hr) */
@@ -236,7 +237,8 @@ html.js .in .ico [pathLength] { stroke-dashoffset: 0; }
 .stat { text-align: center; padding: 28px 16px; background: var(--bg-2); border-radius: var(--radius); }
 .stat .v { font-size: clamp(2.4rem, 5vw, 3.6rem); font-weight: 700; letter-spacing: -.04em; color: var(--ink); line-height: 1; }
 .stat .v small { font-size: .5em; font-weight: 600; margin-left: 2px; }
-.stat .l { color: var(--muted); margin-top: 10px; font-size: .98rem; }
+.stat .l { color: var(--muted); margin-top: 10px; font-size: .98rem; text-wrap: balance; }
+.stat .v .od { color: #c7c7cc; }
 
 /* koraci suradnje */
 .timeline { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; position: relative; }
@@ -297,7 +299,7 @@ html.js .in .tik [pathLength] { stroke-dashoffset: 0; }
 .slide-tijelo h3 a:hover { color: var(--accent); text-decoration: none; }
 
 /* mreža kartica natječaja (uzor: impulsconsulting.eu/novosti, sa scenama umjesto fotografija) */
-.nk-mreza { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.nk-mreza { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 22px; }
 .nk { background: #fff; border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 1px 2px rgba(0,0,0,.04); transition: transform .45s var(--ease), box-shadow .45s var(--ease); }
 .nk:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,.09); }
 .nk-slika { position: relative; display: block; }
@@ -330,7 +332,7 @@ html.js .in .tik [pathLength] { stroke-dashoffset: 0; }
 .np-glava .meta .st.naj { background: #eef7ff; color: #0058b0; font-weight: 600; }
 .np-glava h1 { font-size: clamp(1.8rem, 3.6vw, 2.7rem); line-height: 1.12; }
 .np-glava .uvod { font-size: 1.18rem; color: var(--ink-2); margin-top: 14px; }
-.np-tijelo { display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 44px; align-items: start; padding-top: 26px; padding-bottom: 70px; }
+.np-tijelo { display: grid; grid-template-columns: minmax(0, 860px) 340px; justify-content: space-between; gap: 44px; align-items: start; padding-top: 26px; padding-bottom: 70px; }
 .np-cinjenice { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-bottom: 30px; }
 .np-cinjenice div { background: var(--bg-2); border-radius: 16px; padding: 16px 18px; }
 .np-cinjenice b { display: block; font-size: .8rem; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
@@ -357,6 +359,7 @@ html.js .in .tik [pathLength] { stroke-dashoffset: 0; }
 .np-napomena { font-size: .82rem; color: var(--muted); margin-top: 14px; }
 .np-srodni { padding: 10px 0 80px; }
 .np-srodni h2 { font-size: 1.6rem; margin-bottom: 18px; }
+@media (min-width: 901px) { .np-srodni .nk-mreza { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .np-nema { text-align: center; padding: 120px 0; }
 
 /* otkrivanje na pomak (samo kad radi JavaScript) */
@@ -424,6 +427,8 @@ html.js .reveal.in { opacity: 1; transform: none; }
   .stats { grid-template-columns: 1fr 1fr; gap: 12px; }
   .stat { padding: 20px 10px; }
   .nk-mreza { grid-template-columns: 1fr; gap: 16px; }
+  .vtraka .slide { width: 280px; margin-right: 14px; }
+  .vtraka .slide h3 { font-size: 1.12rem; }
   /* filteri na mobitelu: jedan red po skupini, povlači se prstom, da se kartice vide odmah */
   .filters { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin: 0 -24px 12px; padding: 2px 24px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .filters::-webkit-scrollbar { display: none; }
