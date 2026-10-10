@@ -139,7 +139,7 @@ section:not(.grey):not(.dark) .tile { background: var(--bg-2); box-shadow: none;
 /* podnožje */
 footer { padding: 28px 0 40px; color: var(--muted); font-size: .8rem; border-top: 1px solid var(--line); }
 footer .row { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-footer a { color: var(--ink-2); margin-left: 18px; }
+footer a { color: var(--ink-2); margin-left: 18px; display: inline-block; padding: 8px 0; }
 
 /* podstranice */
 /* samo gore i dolje: skraćeni oblik padding bi poništio bočni razmak klase .wrap (na mobitelu tekst do ruba) */
@@ -474,5 +474,7 @@ html.js .reveal.in { opacity: 1; transform: none; }
   .menu.stalno a { padding: 8px 0; font-size: .95rem; }
   .cta { padding: 44px 22px; border-radius: 22px; }
   footer .row { flex-direction: column; }
-  footer a { margin-left: 0; margin-right: 18px; }
+  footer a { margin-left: 0; margin-right: 22px; padding: 13px 0; }
+  /* poveznice ne smiju stajati uz donji rub: na iPhoneu prvi dodir u dnu ekrana samo vrati Safarijevu traku s adresom */
+  footer { padding-bottom: calc(110px + env(safe-area-inset-bottom, 0px)); }
 }
