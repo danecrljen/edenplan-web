@@ -48,15 +48,20 @@ window.NAT = (function () {
 })();
 
 // Izbornik na mobitelu: otvara se i zatvara glatko (CSS), zatvara se dodirom na poveznicu, dodirom izvan izbornika ili tipkom Esc.
+// Rukovanje je na documentu, ne na samom gumbu: radi od trenutka kad se gumb pojavi, i dok se ostatak stranice još učitava
+// (pri prvom ulasku preko mobilne mreže gumb je vidljiv prije nego što se stranica učita do kraja).
 (function () {
-  function init() {
-    var b = document.querySelector('.burger'), m = document.getElementById('menu');
-    if (!b || !m) return;
-    function postavi(otvoren) { m.classList.toggle('open', otvoren); b.classList.toggle('open', otvoren); b.setAttribute('aria-expanded', otvoren ? 'true' : 'false'); }
-    b.addEventListener('click', function (e) { e.stopPropagation(); postavi(!m.classList.contains('open')); });
-    m.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) postavi(false); });
-    document.addEventListener('click', function (e) { if (m.classList.contains('open') && !m.contains(e.target) && !b.contains(e.target)) postavi(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') postavi(false); });
+  function postavi(otvoren) {
+    var m = document.getElementById('menu'), b = document.querySelector('.burger');
+    if (!m || !b) return;
+    m.classList.toggle('open', otvoren); b.classList.toggle('open', otvoren); b.setAttribute('aria-expanded', otvoren ? 'true' : 'false');
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  document.addEventListener('click', function (e) {
+    var t = e.target, m = document.getElementById('menu');
+    if (!t || !t.closest) return;
+    if (t.closest('.burger')) { postavi(!(m && m.classList.contains('open'))); return; }
+    if (t.closest('#menu a')) { postavi(false); return; }
+    if (m && m.classList.contains('open') && !m.contains(t)) postavi(false);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') postavi(false); });
 })();
