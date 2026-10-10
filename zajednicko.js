@@ -46,3 +46,17 @@ window.NAT = (function () {
   }
   return { esc: esc, kratko: kratko, dana: dana, datum: datum, rijecDan: rijecDan, aktivan: aktivan, status: status, poredaj: poredaj, temaInfo: temaInfo, link: link, scena: scena, kartica: kartica, ucitaj: ucitaj, KOGA: KOGA, danas: danas };
 })();
+
+// Izbornik na mobitelu: otvara se i zatvara glatko (CSS), zatvara se dodirom na poveznicu, dodirom izvan izbornika ili tipkom Esc.
+(function () {
+  function init() {
+    var b = document.querySelector('.burger'), m = document.getElementById('menu');
+    if (!b || !m) return;
+    function postavi(otvoren) { m.classList.toggle('open', otvoren); b.classList.toggle('open', otvoren); b.setAttribute('aria-expanded', otvoren ? 'true' : 'false'); }
+    b.addEventListener('click', function (e) { e.stopPropagation(); postavi(!m.classList.contains('open')); });
+    m.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('a')) postavi(false); });
+    document.addEventListener('click', function (e) { if (m.classList.contains('open') && !m.contains(e.target) && !b.contains(e.target)) postavi(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') postavi(false); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
